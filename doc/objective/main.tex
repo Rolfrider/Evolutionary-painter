@@ -1,29 +1,37 @@
 \documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
 
 \title{Ewolucyjny malarz \\ \large Cel projektu}
 \author{Rafał Kwiatkowski, Franciszek Sioma}
 
 
 \begin{document}
-\maketitle
 \pagenumbering{gobble}
-It's a human sign
-When things go wrong
-When the scent of her lingers
-And temptation's strong
-Into the boundary
-Of each married man
-Sweet deceit comes calling
-And negativity lands
-Cold, cold heart
-Hard done by you
-Some things look better, baby
-Just passing through
-And it's no sacrifice
-Just a simple word
-It's two hearts living
-In two separate worlds
-But it's no sacrifice
-No sacrifice
-It's no sacrifice at all
+\maketitle
+
+Celem projektu {\it Ewolucyjny Malarz} jest stworzenie aplikacji wykorzystującej algorytm ewolucyjny, która na wejściu przyjmuje kolorowy obrazek, a na wyjściu zwraca możliwe jak najdokładniejsze odwzorowanie tego obrazu przy użyciu prostokątów RGBA. 
+
+W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Osobnik}. W naszym przypadku osobnikiem będzie obraz stworzony z {\it n} prostokątów RGBA. Każdy prostokąt będzie się składał z 8 wartości: 
+\begin{description}
+    \item[R] kanał czerwony
+    \item[G] kanał zielony
+    \item[B] kanał niebieski
+    \item[A] kanał alpha (mówi o przezroczystości danego piksela)
+    \item[X] pozycja względem osi poziomej
+    \item[Y] pozycja względem osi pionowej
+    \item[W] szerokość
+    \item[H] wysokość       
+\end{description}
+
+Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania ({\it J}). W naszym przypadku funkcja ta będzie przyjmować wartości od 0 do 1 i będzie obliczana na podstawie porównywania piksel po pikselu obrazu stworzonego przez osobnika z obrazem oryginalnym.
+
+Planujemy wykonać szereg testów, które pomogą nam odpowiedzieć na pytanie jak działa aplikacja w zależności od następujących parametrów:
+\begin{itemize}
+    \item liczebność populacji
+    \item liczba prostokątów w danym osobniku
+    \item strategia krzyżowania
+    \item strategia mutowania
+\end{itemize}
 \end{document}
