@@ -1,25 +1,22 @@
 from PIL import Image, ImageChops
 from typing import List
 from data_struct.rgba_rect import RGBARect
+from image_processing.creator import createImage
 import numpy
 
 
 class Comparator:
 
-    def __init__(self, image: Image):
-        self.refImage = image
+    def __init__(self, imagePath: str):
+        self.refImage = Image.open(imagePath)
 
     def evaluate(self, individual: List[RGBARect]) -> float:
-        image = self.__createImage(individual)
+        image = createImage(
+            individual, self.refImage.size[0], self.refImage.size[1])
         diffImage = ImageChops.difference(self.refImage.convert('RGBA'), image)
-        return 1 - self.__calculateDifference(diffImage)
+        return 1 - self.__calculate(diffImage)
 
-    def __calculateDifference(self, diffImage: Image) -> float:
+    def __calculate(self, diffImage: Image) -> float:
         pixelsNo = diffImage.size[0] * diffImage.size[1]
         diff = numpy.sum(diffImage) / float(3 * pixelsNo)
         return diff / 255.0
-
-    def __createImage(self, individual: List[RGBARect]) -> Image:
-        image = Image.new(
-            'RGBA', (self.refImage.size[0], self.refImage.size[1]))
-        return image
