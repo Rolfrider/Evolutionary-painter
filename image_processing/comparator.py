@@ -18,5 +18,5 @@ class Comparator:
 
     def __calculate(self, diffImage: Image) -> float:
         pixelsNo = diffImage.size[0] * diffImage.size[1]
-        diff = numpy.sum(diffImage) / float(3 * pixelsNo)
+        diff = numpy.sum(diffImage) / float(4 * pixelsNo)
         return diff / 255.0
