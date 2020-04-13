@@ -1,13 +1,8 @@
 from PIL import Image
-
+from image_processing.comparator import Comparator
 im = Image.open("YouDidIt.png")
 
-pix = im.load()
+comp = Comparator(im)
+percent = comp.evaluate([])
 
-print(im.size)
-source = im.split()
-print(source)
-# print("R=", r, "G=", g, "B=", b)
-
-def openImage(path: str) -> Image:
-    return Image.open(path)
+print(percent)
