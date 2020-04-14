@@ -1,7 +1,10 @@
 from image_processing.comparator import Comparator
 from data_struct.rgba_rect import RGBARect
 from image_processing.creator import createImage
+from evolutionary_algorithm.population import Population
+from evolutionary_algorithm.individual import Individual
 
+"""
 individual = [
     RGBARect(255, 0, 0, 0.5, 10, 0, 100, 200),
     RGBARect(0, 255, 0, 0.5, 50, 0, 100, 200),
@@ -11,12 +14,15 @@ individual = [
     RGBARect(200, 100, 105, 1, 400, 100, 100, 200),
     RGBARect(200, 100, 205, 0.6, 220, 210, 200, 250),
 ]
+"""
 
-individualImage = createImage(individual, 500, 500)
-individualImage.show()
-
+population = Population()
+population.newPopulation(3, 10, 500, 500)
 
 comp = Comparator("YouDidIt.png")
-percent = comp.evaluate(individual)
+for individual in population.individuals:
+    individualImage = createImage(individual, 500, 500)
+    individualImage.show()
 
-print(percent)
+    percent = comp.evaluate(individual)
+    print(percent)
