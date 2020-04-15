@@ -1,5 +1,6 @@
 from evolutionary_algorithm.individual import Individual
 
+
 class Population:
     def __init__(self):
         self.individuals = list()
@@ -9,3 +10,11 @@ class Population:
             individual = Individual(None)
             individual.createRandomRects(numberOfRects, width, height)
             self.individuals.append(individual)
+    
+    def addIndividual(self, individual: Individual):
+        self.individuals.append(individual)
+
+    def getIndividual(self, index: int) -> Individual:
+        return self.individuals[index]
+    
+     #TODO: breeding
