@@ -3,12 +3,13 @@ from random import randint
 from evolutionary_algorithm.population import Population
 from image_processing.comparator import Comparator
 from evolutionary_algorithm.individual_generator import generateIndividual
+from PIL import Image
 
 class Algorithm:
-    def __init__(self, sizeOfPopulation: int):
+    def __init__(self, image: Image, sizeOfPopulation: int):
         self.population = Population()
         self.population.individuals = [generateIndividual(10, 500, 500) for i in range(0, sizeOfPopulation)]
-        self.comp = Comparator("YouDidIt.png")
+        self.comp = Comparator(image)
 
     def createNextGeneration(self, numberOfParents):
         offspring = Population()

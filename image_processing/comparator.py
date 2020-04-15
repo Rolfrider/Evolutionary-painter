@@ -7,8 +7,8 @@ import numpy
 
 class Comparator:
 
-    def __init__(self, imagePath: str):
-        self.refImage = Image.open(imagePath)
+    def __init__(self, image: Image):
+        self.refImage = image
 
     def evaluate(self, individual: List[RGBARect]) -> float:
         image = createImage(
