@@ -10,3 +10,10 @@ class RGBARect:
         self.y = y
         self.w = w
         self.h = h
+
+    def __add__(self, other):
+        return RGBARect(self.r+other.r, self.g+other.g, self.b+other.b, self.a+other.a, self.x+other.x ,self.y+other.y ,self.w+other.w ,self.h+other.h)
+
+    def __floordiv__(self, other):
+        if isinstance(other, int):
+            return RGBARect(self.r//other, self.g//other, self.b//other, self.a//other, self.x//other, self.y//other, self.w//other, self.h//other)

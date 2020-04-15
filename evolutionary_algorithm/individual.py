@@ -13,3 +13,11 @@ class Individual:
             self.deviations = list()
         else:
             self.deviations = offspringDeviations
+
+    def cross(self, individual):
+        rects = list()
+        deviations = list()
+        for i in range(0, len(self.rects)):
+            rects.append((self.rects[i]+individual.rects[i])//2)
+            deviations.append(self.deviations[i]+individual.deviations[i]//2)
+        return Individual(rects, deviations)
