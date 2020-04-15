@@ -1,8 +1,7 @@
 from image_processing.comparator import Comparator
 from data_struct.rgba_rect import RGBARect
 from image_processing.creator import createImage
-from evolutionary_algorithm.population import Population
-from evolutionary_algorithm.individual import Individual
+from evolutionary_algorithm.algorithm import Algorithm
 
 """
 individual = [
@@ -16,11 +15,10 @@ individual = [
 ]
 """
 
-population = Population()
-population.newPopulation(3, 10, 500, 500)
+algorithm = Algorithm(3)
 
 comp = Comparator("YouDidIt.png")
-for individual in population.individuals:
+for individual in algorithm.population.individuals:
     individualImage = createImage(individual, 500, 500)
     individualImage.show()
 

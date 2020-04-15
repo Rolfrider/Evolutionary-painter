@@ -4,21 +4,12 @@ from random import randint
 from typing import List
 
 class Individual:
-    def __init__(self, offspringRects: List[RGBARect]):
+    def __init__(self, offspringRects = None, offspringDeviations = None ):
         if offspringRects == None :
             self.rects = list()
         else:
             self.rects = offspringRects
-
-    def createRandomRects(self, numberOfRects: int, width: int, height: int):
-        seed()
-        for i in range(numberOfRects):
-            r = randint(0, 255)
-            g = randint(0, 255)
-            b = randint(0, 255)
-            a = randint(0, 255)
-            x = randint(0, width)
-            y = randint(0, height)
-            w = randint(0, width-x)
-            h = randint(0, height-y)
-            self.rects.append(RGBARect(r, g, b, a, x, y, w, h))
+        if offspringDeviations == None :
+            self.deviations = list()
+        else:
+            self.deviations = offspringDeviations
