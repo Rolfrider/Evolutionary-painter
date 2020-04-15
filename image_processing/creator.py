@@ -11,7 +11,7 @@ def createImage(individual: Individual, width: int, height: int) -> Image:
         image = Image.new('RGBA', (width, height))
         draw = ImageDraw.Draw(image)
         draw.rectangle(calcVertexes(rect),
-                       (rect.r, rect.g, rect.b, int(rect.a * 255)))
+                       (rect.r, rect.g, rect.b, rect.a))
         finalImage = Image.alpha_composite(finalImage, image)
     return finalImage
 
