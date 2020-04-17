@@ -17,29 +17,34 @@ class Algorithm:
         self.population = None
 
     def start(self, image: Image, sizeOfPopulation: int, numberOfRects: int, subPopulationSize: int, maxIter: int, condition: float):
-
-        
+       
         width, height = image.size
         self.comp = Comparator(image)
+        iter = 0
         # create initial 
-        self.population = Population(self.createInitialPopulation(sizeOfPopulation, numberOfRects, width, height))
-        # create sub population
-        subPopulation = Population(self.population.createSubPopulation(subPopulationSize))
+        self.population = self.createInitialPopulation(sizeOfPopulation, numberOfRects, width, height)
+        while iter != maxIter :
+            # create sub population
+            subPopulation = self.population.createSubPopulation(subPopulationSize)
 
-        # cross: każdy kolejny czyli 1 z 2, 2 z 3 i tak dalej i ostatni z pierwszym
-        offspring = Population(subPopulation.createOffspringByCrossing(self.crossingStrategy))
-        # mutation
-        for individual in offspring.individuals:
-            individual.mutate()
-        # picking next population
-        self.population = self.population.pick(self.comp, self.pickingStrategy, sizeOfPopulation)
-        # checking if finish
-        bestIndividual, bestFitting = self.population.bestIndividual(self.comp)
-        if bestFitting >= condition:
-            individualImage = createImage(bestIndividual, 500, 500)
-            individualImage.show()
-        pass
+            # cross: każdy kolejny czyli 1 z 2, 2 z 3 i tak dalej i ostatni z pierwszym
+            offspring = subPopulation.createOffspringByCrossing(self.crossingStrategy)
+            # mutation
+            offspring.mutate()
+            # picking next population
+            self.population = pick(self.population, self.comp, self.pickingStrategy, sizeOfPopulation)
+            # checking if finish
+            bestIndividual, bestFitting = self.population.bestIndividual(self.comp)
+            if bestFitting >= condition:
+                individualImage = createImage(bestIndividual, 500, 500)
+                individualImage.show()
+                iter+=1
+                break
+            else:
+                iter+=1
+                print(iter)
+                print(bestFitting)
         
     def createInitialPopulation(self, sizeOfPopulation: int, numberOfRects: int, width: int, height: int):
         individuals = [generateIndividual(numberOfRects, width, height) for i in range(0, sizeOfPopulation)]
-        return individuals
+        return Population(individuals)

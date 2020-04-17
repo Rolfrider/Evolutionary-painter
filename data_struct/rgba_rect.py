@@ -52,16 +52,17 @@ class RGBARect():
         if isinstance(other, int):
             return RGBARect(self.r//other, self.g//other, self.b//other, self.a//other, self.x//other, self.y//other, self.w//other, self.h//other)
     
-    def mutateDeviation(self, random: int, numberOfRects: int):
+    #zamienić expa na recta
+    def mutateDeviation(self, other):
         seed()
-        self.r = self.r * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
-        self.g = self.g * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
-        self.b = self.b * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
-        self.a = self.a * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
-        self.x = self.x * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
-        self.y = self.y * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
-        self.w = self.w * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
-        self.h = self.h * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.r *= other.r
+        self.g *= other.g
+        self.b *= other.b
+        self.a *= other.a
+        self.x *= other.x
+        self.y *= other.y
+        self.w *= other.w
+        self.h *= other.h
     
     def mutateRect(self, deviation):
         self.r = self.r + deviation.r*random()

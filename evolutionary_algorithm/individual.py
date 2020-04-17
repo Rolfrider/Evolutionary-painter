@@ -17,7 +17,9 @@ class IndividualRect:
 
     def mutate(self, numberOfRects: int):
         seed()
-        self.deviation.mutateDeviation(random(), numberOfRects)
+        multi = exp((1/sqrt(2*numberOfRects))*random()+(1/sqrt(2*sqrt(numberOfRects))))
+        multiRect = RGBARect(multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random())
+        self.deviation.mutateDeviation(multiRect)
         self.rect.mutateRect(self.deviation)
         
 
