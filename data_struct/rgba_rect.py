@@ -1,3 +1,6 @@
+from math import exp, sqrt
+from random import seed, randint, random
+
 class RGBARect():
 
     def __init__(self, r, g, b, a, x, y, w, h):
@@ -48,3 +51,24 @@ class RGBARect():
     def __floordiv__(self, other):
         if isinstance(other, int):
             return RGBARect(self.r//other, self.g//other, self.b//other, self.a//other, self.x//other, self.y//other, self.w//other, self.h//other)
+    
+    def mutateDeviation(self, random: int, numberOfRects: int):
+        seed()
+        self.r = self.r * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.g = self.g * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.b = self.b * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.a = self.a * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.x = self.x * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.y = self.y * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.w = self.w * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+        self.h = self.h * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
+    
+    def mutateRect(self, deviation: RGBARect):
+        self.r = self.r + deviation.r*random()
+        self.g = self.g + deviation.g*random()
+        self.b = self.b + deviation.b*random()
+        self.a = self.a + deviation.a*random()
+        self.x = self.x + deviation.x*random()
+        self.y = self.y + deviation.y*random()
+        self.w = self.w + deviation.w*random()
+        self.h = self.h + deviation.h*random()

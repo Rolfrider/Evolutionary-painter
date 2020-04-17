@@ -17,7 +17,8 @@ individual = [
 """
 image = Image.open("YouDidIt.png")
 algorithm = Algorithm(image, 5, 20)
-algorithm.createNextGeneration(3)
+for i in range(0, 5):
+    algorithm.createNextGeneration(3)
 
 comp = Comparator(image)
 for individual in algorithm.population.individuals:

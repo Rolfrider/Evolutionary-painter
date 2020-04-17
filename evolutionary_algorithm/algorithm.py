@@ -10,22 +10,23 @@ class Algorithm:
     
     crossingStrategy: CrossingStrategy = MeanCrossing()
 
-    def __init__(self, image: Image, sizeOfPopulation: int, numberOfRects):
-        self.width, self.height = image.size
-        individuals = [generateIndividual(numberOfRects, self.width, self.height) for i in range(0, sizeOfPopulation)]
-        self.population = Population(individuals)
+    def __init__(self):
+        self.population = None
+
+    def start(self, image: Image, sizeOfPopulation: int, numberOfRects: int, subPopulationSize: int):
+
+        width, height = image.size
         self.comp = Comparator(image)
-
-    def start():
-
         # create initial 
-
+        self.population = Population(self.createInitialPopulation(sizeOfPopulation, numberOfRects, width, height))
         # create sub population
+        subPopulation = Population(self.population.createSubPopulation(subPopulationSize))
 
         # cross: każdy kolejny czyli 1 z 2, 2 z 3 i tak dalej i ostatni z pierwszym
-
+        offspring = Population(subPopulation.createOffspringByCrossing(self.crossingStrategy))
         # mutation
-
+        for individual in offspring.individuals:
+            individual.mutate()
         # picking next population
 
         # checking if finish
@@ -46,8 +47,10 @@ class Algorithm:
                 offspring.individuals.append(offspring.individuals[i].cross(offspring.individuals[j], self.crossingStrategy))
 
         for i in range(0, numberOfParents):
-            del offspring.individuals[1] # to nie rozumiem totalnie dla każdego parenta usuwamy tą samą rzecz ? to chyba jakiś błąd zaraz wleci
+            del offspring.individuals[0] # to nie rozumiem totalnie dla każdego parenta usuwamy tą samą rzecz ? to chyba jakiś błąd zaraz wleci
 
         self.population = Population(self.population.individuals + offspring.individuals) #TODO: Check if logic correct
         
-        
+    def createInitialPopulation(self, sizeOfPopulation: int, numberOfRects: int, width: int, height: int):
+        individuals = [generateIndividual(numberOfRects, width, height) for i in range(0, sizeOfPopulation)]
+        return individuals
