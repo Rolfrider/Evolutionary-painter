@@ -31,8 +31,10 @@ class Algorithm:
             offspring = subPopulation.createOffspringByCrossing(self.crossingStrategy)
             # mutation
             offspring.mutate()
+
             # picking next population
-            self.population = pick(self.population, self.comp, self.pickingStrategy, sizeOfPopulation)
+            sum_of_populations = self.population.plus(offspring)
+            self.population = pick(sum_of_populations, self.comp, self.pickingStrategy, sizeOfPopulation)
             # checking if finish
             bestIndividual, bestFitting = self.population.bestIndividual(self.comp)
             if bestFitting >= condition:

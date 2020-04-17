@@ -20,9 +20,9 @@ algorithm = Algorithm()
 algorithm.start(
     image,
     sizeOfPopulation=10, 
-    numberOfRects=40, 
-    subPopulationSize=10, 
-    maxIter=20, 
+    numberOfRects=300, 
+    subPopulationSize=5, 
+    maxIter=10, 
     condition=0.9
 )
 

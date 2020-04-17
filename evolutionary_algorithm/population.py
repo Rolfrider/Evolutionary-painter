@@ -37,3 +37,6 @@ class Population:
         for individual in self.individuals:
             individual.correct(width, height)
 
+    def plus(self, other):
+        return Population(self.individuals + other.individuals)
+
