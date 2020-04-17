@@ -32,3 +32,8 @@ class Population:
     def mutate(self):
         for individual in self.individuals:
             individual.mutate()
+
+    def correct(self, width:int, height:int):
+        for individual in self.individuals:
+            individual.correct(width, height)
+

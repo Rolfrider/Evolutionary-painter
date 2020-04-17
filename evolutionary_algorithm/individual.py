@@ -15,12 +15,16 @@ class IndividualRect:
         new_deviation = strategy.cross(self.deviation, other.deviation)
         return IndividualRect(new_rect, new_deviation)
 
-    def mutate(self, numberOfRects: int):
+    def mutate(self, numberOfRects: int, randomN: float):
         seed()
-        multi = exp((1/sqrt(2*numberOfRects))*random()+(1/sqrt(2*sqrt(numberOfRects))))
+        multi = exp((1/sqrt(2*numberOfRects))*randomN+(1/sqrt(2*sqrt(numberOfRects))))
         multiRect = RGBARect(multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random())
         self.deviation.mutateDeviation(multiRect)
         self.rect.mutateRect(self.deviation)
+
+    def correct(self, width:int, height:int):
+        self.rect.correct(width, height)
+
         
 
 
@@ -34,5 +38,10 @@ class Individual:
         return Individual(new_data)
  
     def mutate(self):
+        seed()
         for x in self.data:
-            x.mutate(len(self.data))
+            x.mutate(len(self.data), random())
+    
+    def correct(self, width:int, height:int):
+        for x in self.data:
+            x.correct(width, height)

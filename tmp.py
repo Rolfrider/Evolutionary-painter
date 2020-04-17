@@ -17,7 +17,7 @@ individual = [
 """
 image = Image.open("YouDidIt.png")
 algorithm = Algorithm()
-algorithm.start(image, 3, 10, 2, -1, 0.8)
+algorithm.start(image, 10, 20, 5, -1, 0.7)
 
 
 comp = Comparator(image)

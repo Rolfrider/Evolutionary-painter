@@ -52,7 +52,6 @@ class RGBARect():
         if isinstance(other, int):
             return RGBARect(self.r//other, self.g//other, self.b//other, self.a//other, self.x//other, self.y//other, self.w//other, self.h//other)
     
-    #zamienić expa na recta
     def mutateDeviation(self, other):
         seed()
         self.r *= other.r
@@ -73,3 +72,13 @@ class RGBARect():
         self.y = self.y + deviation.y*random()
         self.w = self.w + deviation.w*random()
         self.h = self.h + deviation.h*random()
+
+    def correct(self, width:int, height:int):
+        self.r = self.r%255
+        self.g = self.g%255
+        self.b = self.b%255
+        self.a = self.a%255
+        self.x = self.x%width
+        self.y = self.y%height
+        self.w = self.w%(width-self.x)
+        self.h = self.h%(height-self.y)
