@@ -1,10 +1,6 @@
-from typing import TypeVar, Generic
+class RGBARect():
 
-T = TypeVar('T')
-
-class RGBARect(Generic[T]):
-
-    def __init__(self, r: T, g: T, b: T, a: T, x: T, y: T, w: T, h: T):
+    def __init__(self, r, g, b, a, x, y, w, h):
         self.r = r
         self.g = g
         self.b = b
@@ -14,10 +10,10 @@ class RGBARect(Generic[T]):
         self.w = w
         self.h = h
 
-    def __add__(self, other: RGBARect) -> RGBARect:
+    def __add__(self, other):
         return RGBARect(self.r+other.r, self.g+other.g, self.b+other.b, self.a+other.a, self.x+other.x ,self.y+other.y ,self.w+other.w ,self.h+other.h)
 
-    def meanWith(self, other: RGBARect) -> RGBARect:
+    def meanWith(self, other):
         return RGBARect(
             self.__mean(self.r, other.r),
             self.__mean(self.g, other.g),
@@ -29,10 +25,11 @@ class RGBARect(Generic[T]):
             self.__mean(self.h, other.h)
         )
 
-    def __mean(self, first, second) -> T:
-        return T((first+second)/2)
+    def __mean(self, first, second):
+        result = (first+second)/2
+        return int(result) if isinstance(first, int) else result
 
-    def interpolate(self, other: RGBARect, factor) -> RGBARect:
+    def interpolate(self, other, factor) :
         return RGBARect(
             self.__iterpolate(self.r, other.r, factor),
             self.__iterpolate(self.g, other.g, factor),
@@ -44,8 +41,9 @@ class RGBARect(Generic[T]):
             self.__iterpolate(self.h, other.h, factor)
         )
         
-    def __iterpolate(self, first, second, factor) -> T:
-        return T(first*factor + (1 - factor)*second)
+    def __iterpolate(self, first, second, factor):
+        result = first*factor + (1 - factor)*second
+        return int(result) if isinstance(first, int) else result
 
     def __floordiv__(self, other):
         if isinstance(other, int):

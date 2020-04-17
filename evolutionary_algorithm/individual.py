@@ -5,11 +5,11 @@ from typing import List
 
 class IndividualRect:
     
-    def __init__(self, rect: RGBARect[int], deviation: RGBARect[float]):
+    def __init__(self, rect: RGBARect, deviation: RGBARect):
         self.rect = rect
         self.deviation = deviation
 
-    def cross(self, other: IndividualRect,  strategy: CrossingStrategy) -> IndividualRect:
+    def cross(self, other,  strategy: CrossingStrategy):
         new_rect = strategy.cross(self.rect, other.rect)
         new_deviation = strategy.cross(self.deviation, other.deviation)
         return IndividualRect(new_rect, new_deviation)
@@ -19,8 +19,8 @@ class Individual:
     def __init__(self, data: List[IndividualRect]):
         self.data = data
 
-    def cross(self, individual: Individual, strategy: CrossingStrategy):
+    def cross(self, individual, strategy: CrossingStrategy):
         assert len(self.data) == len(individual.data)
-        new_data = [me.cross(other, strategy) for me, other in zip(self.data, individual)]
+        new_data = [me.cross(other, strategy) for me, other in zip(self.data, individual.data)]
         return Individual(new_data)
  
