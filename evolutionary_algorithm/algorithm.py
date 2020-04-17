@@ -2,19 +2,23 @@ from random import seed
 from random import randint
 from evolutionary_algorithm.population import Population
 from evolutionary_algorithm.crossing import *
+from evolutionary_algorithm.picking import *
 from image_processing.comparator import Comparator
+from image_processing.creator import createImage
 from evolutionary_algorithm.individual_generator import generateIndividual
 from PIL import Image
 
 class Algorithm:
     
     crossingStrategy: CrossingStrategy = MeanCrossing()
+    pickingStrategy: PickingStrategy = BestFittingStrategy()
 
     def __init__(self):
         self.population = None
 
-    def start(self, image: Image, sizeOfPopulation: int, numberOfRects: int, subPopulationSize: int):
+    def start(self, image: Image, sizeOfPopulation: int, numberOfRects: int, subPopulationSize: int, maxIter: int, condition: float):
 
+        
         width, height = image.size
         self.comp = Comparator(image)
         # create initial 
@@ -28,28 +32,13 @@ class Algorithm:
         for individual in offspring.individuals:
             individual.mutate()
         # picking next population
-
+        self.population = self.population.pick(self.comp, self.pickingStrategy, sizeOfPopulation)
         # checking if finish
+        bestIndividual, bestFitting = self.population.bestIndividual(self.comp)
+        if bestFitting >= condition:
+            individualImage = createImage(bestIndividual, 500, 500)
+            individualImage.show()
         pass
-
-    def createNextGeneration(self, numberOfParents):
-        new_inviduals = []
-        seed()
-        for i in range(0, numberOfParents):
-            index = randint(0, len(self.population.individuals)-1)
-            new_inviduals.append(self.population.individuals[index])
-
-        offspring = Population(new_inviduals)
-            
-        #TODO: Make it happen in population
-        for i in range(0, numberOfParents-1):
-            for j in range(i+1, numberOfParents):
-                offspring.individuals.append(offspring.individuals[i].cross(offspring.individuals[j], self.crossingStrategy))
-
-        for i in range(0, numberOfParents):
-            del offspring.individuals[0] # to nie rozumiem totalnie dla każdego parenta usuwamy tą samą rzecz ? to chyba jakiś błąd zaraz wleci
-
-        self.population = Population(self.population.individuals + offspring.individuals) #TODO: Check if logic correct
         
     def createInitialPopulation(self, sizeOfPopulation: int, numberOfRects: int, width: int, height: int):
         individuals = [generateIndividual(numberOfRects, width, height) for i in range(0, sizeOfPopulation)]
