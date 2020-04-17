@@ -16,6 +16,21 @@ class Algorithm:
         self.population = Population(individuals)
         self.comp = Comparator(image)
 
+    def start():
+
+        # create initial 
+
+        # create sub population
+
+        # cross: każdy kolejny czyli 1 z 2, 2 z 3 i tak dalej i ostatni z pierwszym
+
+        # mutation
+
+        # picking next population
+
+        # checking if finish
+        pass
+
     def createNextGeneration(self, numberOfParents):
         new_inviduals = []
         seed()
