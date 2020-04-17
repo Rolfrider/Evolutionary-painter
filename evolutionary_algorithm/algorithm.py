@@ -38,7 +38,7 @@ class Algorithm:
             # checking if finish
             bestIndividual, bestFitting = self.population.bestIndividual(self.comp)
             if bestFitting >= condition:
-                individualImage = createImage(bestIndividual, 500, 500)
+                individualImage = createImage(bestIndividual, image.size[0], image.size[1])
                 individualImage.show()
                 iter+=1
                 break
