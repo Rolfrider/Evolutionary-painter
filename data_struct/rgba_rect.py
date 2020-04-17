@@ -63,7 +63,7 @@ class RGBARect():
         self.w = self.w * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
         self.h = self.h * exp((1/sqrt(2*numberOfRects))*random+(1/sqrt(2*sqrt(numberOfRects)))*random())
     
-    def mutateRect(self, deviation: RGBARect):
+    def mutateRect(self, deviation):
         self.r = self.r + deviation.r*random()
         self.g = self.g + deviation.g*random()
         self.b = self.b + deviation.b*random()

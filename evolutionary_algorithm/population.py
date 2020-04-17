@@ -24,15 +24,15 @@ class Population:
             offspring.append(self.individuals[i].cross(self.individuals[(i+1)%len(self.individuals)], crossingStrategy))
         return offspring
 
-    def pick(self, comp: Comparator, pickingStartegy: PickingStrategy, sizeOfPopulation: int) -> list(Individual):
-        fitting = [comp.evaluate(individual) for individual in self.individuals]
-        mappedFitting = zip(self.individuals, fitting)
-        newPopulation = pickingStartegy.pick(mappedFitting, sizeOfPopulation)
-        return newPopulation
-
     def bestIndividual(self, comp: Comparator):
         fitting = [comp.evaluate(x) for x in self.individuals]
         mappedFitting = zip(self.individuals, fitting)
         sortedFitting = sorted(mappedFitting, key = lambda x: float(x[1]), reverse=True)
         return sortedFitting[0]
+
+    def pick(self, comp: Comparator, pickingStartegy: PickingStrategy, sizeOfPopulation: int) -> list(Individual):
+        fitting = [comp.evaluate(individual) for individual in self.individuals]
+        mappedFitting = zip(self.individuals, fitting)
+        newPopulation = pickingStartegy.pick(mappedFitting, sizeOfPopulation)
+        return newPopulation
 

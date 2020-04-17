@@ -10,8 +10,8 @@ class PickingStrategy(ABC):
 class BestFittingStrategy(PickingStrategy):
     
     def pick(self, mappedFitting, sizeOfPopulation:int) ->list(Individual):
-        sortedFitting = sorted(mappedFitting, key = lambda x: float(x[1]), reverse=True)
-        newPopulation = []
-        for i in range(0, sizeOfPopulation):
-            newPopulation.append(sortedFitting[i][0])
-        return newPopulation
+        sortedFitting = sorted(list(mappedFitting), key = lambda x: float(x[1]), reverse=True)
+        sortedPopulation = []
+        for x in sortedFitting:
+            sortedPopulation.append(x[0])
+        return [sortedPopulation[i] for i in range(0, sizeOfPopulation)]
