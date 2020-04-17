@@ -1,8 +1,8 @@
 from data_struct.rgba_rect import RGBARect
 from evolutionary_algorithm.crossing import CrossingStrategy
-from random import seed, randint, random
 from typing import List
 from math import exp, sqrt
+from numpy import random
 
 class IndividualRect:
     
@@ -16,9 +16,17 @@ class IndividualRect:
         return IndividualRect(new_rect, new_deviation)
 
     def mutate(self, numberOfRects: int, randomN: float):
-        seed()
         multi = exp((1/sqrt(2*numberOfRects))*randomN+(1/sqrt(2*sqrt(numberOfRects))))
-        multiRect = RGBARect(multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random(), multi*random())
+        multiRect = RGBARect(
+            multi*random.normal(), 
+            multi*random.normal(), 
+            multi*random.normal(), 
+            multi*random.normal(), 
+            multi*random.normal(), 
+            multi*random.normal(), 
+            multi*random.normal(), 
+            multi*random.normal()
+        )
         self.deviation.mutateDeviation(multiRect)
         self.rect.mutateRect(self.deviation)
 
@@ -38,9 +46,9 @@ class Individual:
         return Individual(new_data)
  
     def mutate(self):
-        seed()
+        randomFactor = random.normal()
         for x in self.data:
-            x.mutate(len(self.data), random())
+            x.mutate(len(self.data), randomFactor)
     
     def correct(self, width:int, height:int):
         for x in self.data:

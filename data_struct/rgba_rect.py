@@ -1,5 +1,5 @@
 from math import exp, sqrt
-from random import seed, randint, random
+from numpy import random
 
 class RGBARect():
 
@@ -53,7 +53,6 @@ class RGBARect():
             return RGBARect(self.r//other, self.g//other, self.b//other, self.a//other, self.x//other, self.y//other, self.w//other, self.h//other)
     
     def mutateDeviation(self, other):
-        seed()
         self.r *= other.r
         self.g *= other.g
         self.b *= other.b
@@ -64,14 +63,14 @@ class RGBARect():
         self.h *= other.h
     
     def mutateRect(self, deviation):
-        self.r = self.r + deviation.r*random()
-        self.g = self.g + deviation.g*random()
-        self.b = self.b + deviation.b*random()
-        self.a = self.a + deviation.a*random()
-        self.x = self.x + deviation.x*random()
-        self.y = self.y + deviation.y*random()
-        self.w = self.w + deviation.w*random()
-        self.h = self.h + deviation.h*random()
+        self.r = int(self.r + deviation.r*random.normal())
+        self.g = int(self.g + deviation.g*random.normal())
+        self.b = int(self.b + deviation.b*random.normal())
+        self.a = int(self.a + deviation.a*random.normal())
+        self.x = int(self.x + deviation.x*random.normal())
+        self.y = int(self.y + deviation.y*random.normal())
+        self.w = int(self.w + deviation.w*random.normal())
+        self.h = int(self.h + deviation.h*random.normal())
 
     def correct(self, width:int, height:int):
         self.r = self.r%255

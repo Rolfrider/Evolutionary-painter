@@ -17,13 +17,20 @@ individual = [
 """
 image = Image.open("YouDidIt.png")
 algorithm = Algorithm()
-algorithm.start(image, 10, 20, 5, -1, 0.7)
+algorithm.start(
+    image,
+    sizeOfPopulation=10, 
+    numberOfRects=40, 
+    subPopulationSize=10, 
+    maxIter=20, 
+    condition=0.9
+)
 
 
-comp = Comparator(image)
-for individual in algorithm.population.individuals:
-    individualImage = createImage(individual, 500, 500)
-    individualImage.show()
+# comp = Comparator(image)
+# for individual in algorithm.population.individuals:
+#     individualImage = createImage(individual, 500, 500)
+#     individualImage.show()
 
-    percent = comp.evaluate(individual)
-    print(percent)
+#     percent = comp.evaluate(individual)
+#     print(percent)
