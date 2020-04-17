@@ -1,23 +1,26 @@
 from data_struct.rgba_rect import RGBARect
-from random import seed
-from random import randint
+from evolutionary_algorithm.crossing import CrossingStrategy
+from random import seed, randint
 from typing import List
 
-class Individual:
-    def __init__(self, offspringRects = None, offspringDeviations = None ):
-        if offspringRects == None :
-            self.rects = list()
-        else:
-            self.rects = offspringRects
-        if offspringDeviations == None :
-            self.deviations = list()
-        else:
-            self.deviations = offspringDeviations
+class IndividualRect:
+    
+    def __init__(self, rect: RGBARect[int], deviation: RGBARect[float]):
+        self.rect = rect
+        self.deviation = deviation
 
-    def cross(self, individual):
-        rects = list()
-        deviations = list()
-        for i in range(0, len(self.rects)):
-            rects.append((self.rects[i]+individual.rects[i])//2)
-            deviations.append(self.deviations[i]+individual.deviations[i]//2)
-        return Individual(rects, deviations)
+    def cross(self, other: IndividualRect,  strategy: CrossingStrategy) -> IndividualRect:
+        new_rect = strategy.cross(self.rect, other.rect)
+        new_deviation = strategy.cross(self.deviation, other.deviation)
+        return IndividualRect(new_rect, new_deviation)
+
+
+class Individual:
+    def __init__(self, data: List[IndividualRect]):
+        self.data = data
+
+    def cross(self, individual: Individual, strategy: CrossingStrategy):
+        assert len(self.data) == len(individual.data)
+        new_data = [me.cross(other, strategy) for me, other in zip(self.data, individual)]
+        return Individual(new_data)
+ 
