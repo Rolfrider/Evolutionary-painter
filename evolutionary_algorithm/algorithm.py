@@ -34,7 +34,6 @@ class Algorithm:
             offspring = subPopulation.createOffspringByCrossing(
                 self.crossingStrategy)
             # mutation
-            offspring.correct(width, height)
             offspring.mutate()
             offspring.correct(width, height)
 

@@ -74,19 +74,28 @@ class RGBARect():
         self.h = int(self.h + deviation.h*random.normal())
 
     def correct(self, width: int, height: int):
-        self.r = self.limit(self.r, 0, 255)
-        self.g = self.limit(self.g, 0, 255)
-        self.b = self.limit(self.b, 0, 255)
-        self.a = self.limit(self.a, 0, 255)
-        self.x = self.limit(self.x, 0, width)
-        self.y = self.limit(self.y, 0, height)
-        self.w = self.limit(self.w, 0, width-self.x)
-        self.h = self.limit(self.h, 0, height-self.y)
+        strategy = self.limit
+        self.r = strategy(self.r, 0, 255)
+        self.g = strategy(self.g, 0, 255)
+        self.b = strategy(self.b, 0, 255)
+        self.a = strategy(self.a, 0, 255)
+        self.x = strategy(self.x, 0, width)
+        self.y = strategy(self.y, 0, height)
+        self.w = strategy(self.w, 0, width-self.x)
+        self.h = strategy(self.h, 0, height-self.y)
 
     def limit(self, value, lower_bound, upper_bound):
         if value < lower_bound:
             return lower_bound
         elif value > upper_bound:
             return upper_bound
+        else:
+            return value
+
+    def overflow(self, value, lower_bound, upper_bound):
+        if value < lower_bound:
+            return (value*-1) % upper_bound
+        elif value > upper_bound:
+            return value % upper_bound
         else:
             return value

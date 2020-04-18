@@ -19,17 +19,17 @@ algorithm = Algorithm()
 algorithm.start(
     image,
     sizeOfPopulation=50,
-    numberOfRects=50,
-    subPopulationSize=10,
-    maxIter=10,
+    numberOfRects=200,
+    subPopulationSize=20,
+    maxIter=100,
     condition=0.8
 )
 
+comp = Comparator(image)
 individualImage = createImage(
-    algorithm.population.individuals[0], image.size[0], image.size[1])
+    algorithm.population.bestIndividual(comp)[0], image.size[0], image.size[1])
 individualImage.show()
 
-# comp = Comparator(image)
 # for individual in algorithm.population.individuals:
 
 #     percent = comp.evaluate(individual)

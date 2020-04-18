@@ -8,7 +8,7 @@ from evolutionary_algorithm.individual import Individual, IndividualRect
 def generateIndividual(numberOfRects: int, width: int, height: int):
     rects = [generateRandomRects(width, height)
              for i in range(0, numberOfRects)]
-    deviations = [genreateRectWithValue(255) for i in range(0, numberOfRects)]
+    deviations = [genreateRectWithValue(1) for i in range(0, numberOfRects)]
     tuples = zip(rects, deviations)
     data = list(map(createDataChunk, tuples))
 
