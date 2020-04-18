@@ -12,7 +12,7 @@ from PIL import Image
 class Algorithm:
 
     crossingStrategy: CrossingStrategy = MeanCrossing()
-    pickingStrategy: PickingStrategy = BestFittingStrategy()
+    pickingStrategy: PickingStrategy = RouletteWheelStrategy()
 
     def __init__(self):
         self.population = None

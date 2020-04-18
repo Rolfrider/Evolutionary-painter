@@ -29,7 +29,7 @@ class RouletteWheelStrategy(PickingStrategy):
             probability.append(exp(x[1]))
         newPopulation = []
         for i in range(0, sizeOfPopulation):
-            index = random.choice(arange(0, len(probability), probability))
+            index = random.choice(arange(0, len(probability)), p = probability)
             newPopulation.append(listedFitting[index][0])
             del listedFitting[index]
             del probability[index]
