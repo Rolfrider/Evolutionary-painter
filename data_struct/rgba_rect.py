@@ -1,6 +1,7 @@
 from math import exp, sqrt
 from numpy import random
 
+
 class RGBARect():
 
     def __init__(self, r, g, b, a, x, y, w, h):
@@ -14,7 +15,7 @@ class RGBARect():
         self.h = h
 
     def __add__(self, other):
-        return RGBARect(self.r+other.r, self.g+other.g, self.b+other.b, self.a+other.a, self.x+other.x ,self.y+other.y ,self.w+other.w ,self.h+other.h)
+        return RGBARect(self.r+other.r, self.g+other.g, self.b+other.b, self.a+other.a, self.x+other.x, self.y+other.y, self.w+other.w, self.h+other.h)
 
     def meanWith(self, other):
         return RGBARect(
@@ -32,7 +33,7 @@ class RGBARect():
         result = (first+second)/2
         return int(result) if isinstance(first, int) else result
 
-    def interpolate(self, other, factor) :
+    def interpolate(self, other, factor):
         return RGBARect(
             self.__iterpolate(self.r, other.r, factor),
             self.__iterpolate(self.g, other.g, factor),
@@ -43,7 +44,7 @@ class RGBARect():
             self.__iterpolate(self.w, other.w, factor),
             self.__iterpolate(self.h, other.h, factor)
         )
-        
+
     def __iterpolate(self, first, second, factor):
         result = first*factor + (1 - factor)*second
         return int(result) if isinstance(first, int) else result
@@ -51,7 +52,7 @@ class RGBARect():
     def __floordiv__(self, other):
         if isinstance(other, int):
             return RGBARect(self.r//other, self.g//other, self.b//other, self.a//other, self.x//other, self.y//other, self.w//other, self.h//other)
-    
+
     def mutateDeviation(self, other):
         self.r *= other.r
         self.g *= other.g
@@ -61,7 +62,7 @@ class RGBARect():
         self.y *= other.y
         self.w *= other.w
         self.h *= other.h
-    
+
     def mutateRect(self, deviation):
         self.r = int(self.r + deviation.r*random.normal())
         self.g = int(self.g + deviation.g*random.normal())
@@ -72,12 +73,20 @@ class RGBARect():
         self.w = int(self.w + deviation.w*random.normal())
         self.h = int(self.h + deviation.h*random.normal())
 
-    def correct(self, width:int, height:int):
-        self.r = self.r%255
-        self.g = self.g%255
-        self.b = self.b%255
-        self.a = self.a%255
-        self.x = self.x%width
-        self.y = self.y%height
-        self.w = self.w%(width-self.x)
-        self.h = self.h%(height-self.y)
+    def correct(self, width: int, height: int):
+        self.r = self.limit(self.r, 0, 255)
+        self.g = self.limit(self.g, 0, 255)
+        self.b = self.limit(self.b, 0, 255)
+        self.a = self.limit(self.a, 0, 255)
+        self.x = self.limit(self.x, 0, width)
+        self.y = self.limit(self.y, 0, height)
+        self.w = self.limit(self.w, 0, width-self.x)
+        self.h = self.limit(self.h, 0, height-self.y)
+
+    def limit(self, value, lower_bound, upper_bound):
+        if value < lower_bound:
+            return lower_bound
+        elif value > upper_bound:
+            return upper_bound
+        else:
+            return value

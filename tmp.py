@@ -4,33 +4,33 @@ from image_processing.creator import createImage
 from evolutionary_algorithm.algorithm import Algorithm
 from PIL import Image
 
-"""
-individual = [
-    RGBARect(255, 0, 0, 0.5, 10, 0, 100, 200),
-    RGBARect(0, 255, 0, 0.5, 50, 0, 100, 200),
-    RGBARect(0, 0, 255, 0.5, 30, 100, 100, 200),
-    RGBARect(90, 100, 155, 0.5, 100, 100, 300, 300),
-    RGBARect(0, 100, 25, 0.5, 290, 190, 200, 200),
-    RGBARect(200, 100, 105, 1, 400, 100, 100, 200),
-    RGBARect(200, 100, 205, 0.6, 220, 210, 200, 250),
-]
-"""
+
+# individual = [
+#     RGBARect(255, 0, 0, 0.5, 10, 0, 100, 200),
+#     RGBARect(0, 255, 0, 0.5, 50, 0, 100, 200),
+#     RGBARect(0, 0, 255, 0.5, 30, 100, 100, 200),
+#     RGBARect(90, 100, 155, 0.5, 100, 100, 300, 300),
+#     RGBARect(0, 100, 25, 0.5, 290, 190, 200, 200),
+#     RGBARect(200, 100, 105, 1, 400, 100, 100, 200),
+#     RGBARect(200, 100, 205, 0.6, 220, 210, 200, 250),
+# ]
 image = Image.open("YouDidIt.png")
 algorithm = Algorithm()
 algorithm.start(
     image,
-    sizeOfPopulation=10, 
-    numberOfRects=30, 
-    subPopulationSize=10, 
-    maxIter=40, 
+    sizeOfPopulation=50,
+    numberOfRects=50,
+    subPopulationSize=10,
+    maxIter=10,
     condition=0.8
 )
 
+individualImage = createImage(
+    algorithm.population.individuals[0], image.size[0], image.size[1])
+individualImage.show()
 
 # comp = Comparator(image)
 # for individual in algorithm.population.individuals:
-#     individualImage = createImage(individual, 500, 500)
-#     individualImage.show()
 
 #     percent = comp.evaluate(individual)
 #     print(percent)

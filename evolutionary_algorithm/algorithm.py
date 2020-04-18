@@ -8,8 +8,9 @@ from image_processing.creator import createImage
 from evolutionary_algorithm.individual_generator import generateIndividual
 from PIL import Image
 
+
 class Algorithm:
-    
+
     crossingStrategy: CrossingStrategy = MeanCrossing()
     pickingStrategy: PickingStrategy = BestFittingStrategy()
 
@@ -17,36 +18,45 @@ class Algorithm:
         self.population = None
 
     def start(self, image: Image, sizeOfPopulation: int, numberOfRects: int, subPopulationSize: int, maxIter: int, condition: float):
-       
+
         width, height = image.size
         self.comp = Comparator(image)
         iter = 0
-        # create initial 
-        self.population = self.createInitialPopulation(sizeOfPopulation, numberOfRects, width, height)
-        while iter != maxIter :
+        # create initial
+        self.population = self.createInitialPopulation(
+            sizeOfPopulation, numberOfRects, width, height)
+        while iter != maxIter:
             # create sub population
-            subPopulation = self.population.createSubPopulation(subPopulationSize)
+            subPopulation = self.population.createSubPopulation(
+                subPopulationSize)
 
             # cross: każdy kolejny czyli 1 z 2, 2 z 3 i tak dalej i ostatni z pierwszym
-            offspring = subPopulation.createOffspringByCrossing(self.crossingStrategy)
+            offspring = subPopulation.createOffspringByCrossing(
+                self.crossingStrategy)
             # mutation
+            offspring.correct(width, height)
             offspring.mutate()
+            offspring.correct(width, height)
 
             # picking next population
             sum_of_populations = self.population.plus(offspring)
-            self.population = pick(sum_of_populations, self.comp, self.pickingStrategy, sizeOfPopulation)
+            self.population = pick(
+                sum_of_populations, self.comp, self.pickingStrategy, sizeOfPopulation)
             # checking if finish
-            bestIndividual, bestFitting = self.population.bestIndividual(self.comp)
+            bestIndividual, bestFitting = self.population.bestIndividual(
+                self.comp)
             if bestFitting >= condition:
-                individualImage = createImage(bestIndividual, image.size[0], image.size[1])
+                individualImage = createImage(
+                    bestIndividual, image.size[0], image.size[1])
                 individualImage.show()
-                iter+=1
+                iter += 1
                 break
             else:
-                iter+=1
+                iter += 1
                 print(iter)
                 print(bestFitting)
-        
+
     def createInitialPopulation(self, sizeOfPopulation: int, numberOfRects: int, width: int, height: int):
-        individuals = [generateIndividual(numberOfRects, width, height) for i in range(0, sizeOfPopulation)]
+        individuals = [generateIndividual(
+            numberOfRects, width, height) for i in range(0, sizeOfPopulation)]
         return Population(individuals)

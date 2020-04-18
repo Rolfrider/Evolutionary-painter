@@ -6,12 +6,18 @@ from evolutionary_algorithm.individual import Individual
 
 def createImage(individual: Individual, width: int, height: int) -> Image:
     finalImage = Image.new('RGBA', (width, height))
+    finalDraw = ImageDraw.Draw(finalImage)
     for rect in map(lambda x: x.rect, individual.data):
-        image = Image.new('RGBA', (width, height))
+        image = Image.new('RGBA', (rect.w, rect.h))
         draw = ImageDraw.Draw(image)
         draw.rectangle(calcVertexes(rect),
                        (rect.r, rect.g, rect.b, rect.a))
-        finalImage = Image.alpha_composite(finalImage, image)
+        finalDraw.bitmap(
+            (rect.x, rect.y),
+            image,
+            (rect.r, rect.g, rect.b, rect.a)
+        )
+        # finalImage = Image.alpha_composite(finalImage, image)
     return finalImage
 
 
