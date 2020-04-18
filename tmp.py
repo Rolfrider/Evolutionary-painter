@@ -22,7 +22,7 @@ algorithm.start(
     numberOfRects=200,
     subPopulationSize=20,
     maxIter=100,
-    condition=0.8
+    condition=0.95
 )
 
 comp = Comparator(image)
