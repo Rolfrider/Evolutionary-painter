@@ -25,25 +25,36 @@ class RouletteWheelStrategy(PickingStrategy):
     def pick(self, mappedFitting, sizeOfPopulation:int) -> List[Individual]:
         probability = []
         listedFitting = list(mappedFitting)
+        probabilitySum = 0
         for x in listedFitting:
             probability.append(exp(x[1]))
+            probabilitySum += exp(x[1])
+        for i in range(0, len(probability)):
+            probability[i] = probability[i]/probabilitySum
         newPopulation = []
         for i in range(0, sizeOfPopulation):
             index = random.choice(arange(0, len(probability)), p = probability)
             newPopulation.append(listedFitting[index][0])
+            probabilitySum - probability[index]
             del listedFitting[index]
             del probability[index]
+            for i in range(0, len(probability)):
+                probability[i] = probability[i]/probabilitySum
         return newPopulation
 
 class RankingSelectionStrategy(PickingStrategy):
     def pick(self, mappedFitting, sizeOfPopulation:int) -> List[Individual]:
         sortedFitting = sorted(list(mappedFitting), key = lambda x: float(x[1]))
         probability = []
+        probabilitySum = 0
         for i in range(1, len(sortedFitting)+1):
             probability.append(i/(len(sortedFitting)+1))
+            probabilitySum += i
+        for x in probability:
+            x = x/probabilitySum
         newPopulation = []
         for i in range(0, sizeOfPopulation):
-            index = random.choice(arange(0, len(probability), probability))
+            index = random.choice(arange(0, len(probability), p = probability))
             newPopulation.append(sortedFitting[index][0])
             del sortedFitting[index]
             del probability[index]
