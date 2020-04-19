@@ -9,8 +9,7 @@ def generateIndividual(numberOfRects: int, width: int, height: int):
     rects = [generateRandomRects(width, height)
              for i in range(0, numberOfRects)]
     deviations = [genreateRectWithValue(100) for i in range(0, numberOfRects)]
-    tuples = zip(rects, deviations)
-    data = list(map(createDataChunk, tuples))
+    data = list(map(createDataChunk, zip(rects, deviations)))
 
     return Individual(data)
 

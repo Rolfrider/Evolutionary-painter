@@ -17,7 +17,6 @@ def createImage(individual: Individual, width: int, height: int) -> Image:
             image,
             (rect.r, rect.g, rect.b, rect.a)
         )
-        # finalImage = Image.alpha_composite(finalImage, image)
     return finalImage
 
 

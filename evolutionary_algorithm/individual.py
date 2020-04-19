@@ -16,22 +16,24 @@ class IndividualRect:
         return IndividualRect(new_rect, new_deviation)
 
     def mutate(self, numberOfRects: int, randomN: float):
-        multi = exp((1/sqrt(2*numberOfRects))*randomN+(1/sqrt(2*sqrt(numberOfRects))))
         multiRect = RGBARect(
-            multi*random.normal(), 
-            multi*random.normal(), 
-            multi*random.normal(), 
-            multi*random.normal(), 
-            multi*random.normal(), 
-            multi*random.normal(), 
-            multi*random.normal(), 
-            multi*random.normal()
+            self.__multiply(numberOfRects, randomN), 
+            self.__multiply(numberOfRects, randomN), 
+            self.__multiply(numberOfRects, randomN), 
+            self.__multiply(numberOfRects, randomN), 
+            self.__multiply(numberOfRects, randomN), 
+            self.__multiply(numberOfRects, randomN), 
+            self.__multiply(numberOfRects, randomN), 
+            self.__multiply(numberOfRects, randomN)
         )
         self.deviation.mutateDeviation(multiRect)
         self.rect.mutateRect(self.deviation)
 
     def correct(self, width:int, height:int):
         self.rect.correct(width, height)
+
+    def __multiply(self, numberOfRects: int, randomN: float) -> float:
+        return exp((1/sqrt(2*numberOfRects))*randomN+(1/sqrt(2*sqrt(numberOfRects)))*random.normal())
 
         
 

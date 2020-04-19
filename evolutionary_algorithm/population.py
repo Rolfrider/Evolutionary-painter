@@ -18,16 +18,17 @@ class Population:
         return Population(new_individuals)
 
     def createOffspringByCrossing(self, crossingStrategy: CrossingStrategy):
-        offspring = []
-        for i in range(0, len(self.individuals)):
-            offspring.append(self.individuals[i].cross(self.individuals[(i+1)%len(self.individuals)], crossingStrategy))
-        return Population(offspring)
+        return Population([individual.cross(self.individuals[(index+1)%len(self.individuals)], crossingStrategy) for index, individual in enumerate(self.individuals)])
 
     def bestIndividual(self, comp: Comparator):
         fitting = [comp.evaluate(x) for x in self.individuals]
-        mappedFitting = zip(self.individuals, fitting)
-        sortedFitting = sorted(mappedFitting, key = lambda x: float(x[1]), reverse=True)
-        return sortedFitting[0]
+        best = 0
+        index = -1
+        for i in range(0, len(fitting)):
+            if best<fitting[i]:
+                best = fitting[i]
+                index = i
+        return self.individuals[index], best
 
     def mutate(self):
         for individual in self.individuals:

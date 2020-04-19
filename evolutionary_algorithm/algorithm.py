@@ -12,7 +12,7 @@ from PIL import Image
 class Algorithm:
 
     crossingStrategy: CrossingStrategy = MeanCrossing()
-    pickingStrategy: PickingStrategy = RouletteWheelStrategy()
+    pickingStrategy: PickingStrategy = BestFittingStrategy()
 
     def __init__(self):
         self.population = None
@@ -22,38 +22,38 @@ class Algorithm:
         width, height = image.size
         self.comp = Comparator(image)
         iter = 0
-        # create initial
+        
         self.population = self.createInitialPopulation(
             sizeOfPopulation, numberOfRects, width, height)
         while iter != maxIter:
-            # create sub population
+            
             subPopulation = self.population.createSubPopulation(
                 subPopulationSize)
 
-            # cross: każdy kolejny czyli 1 z 2, 2 z 3 i tak dalej i ostatni z pierwszym
+            
             offspring = subPopulation.createOffspringByCrossing(
                 self.crossingStrategy)
-            # mutation
+            
             offspring.mutate()
             offspring.correct(width, height)
 
-            # picking next population
+            
             sum_of_populations = self.population.plus(offspring)
             self.population = pick(
                 sum_of_populations, self.comp, self.pickingStrategy, sizeOfPopulation)
-            # checking if finish
+           
             bestIndividual, bestFitting = self.population.bestIndividual(
                 self.comp)
+            iter += 1  
             if bestFitting >= condition:
-                individualImage = createImage(
-                    bestIndividual, image.size[0], image.size[1])
-                individualImage.show()
-                iter += 1
+    
                 break
             else:
-                iter += 1
                 print(iter)
                 print(bestFitting)
+        individualImage = createImage(
+            bestIndividual, image.size[0], image.size[1])
+        individualImage.show()
 
     def createInitialPopulation(self, sizeOfPopulation: int, numberOfRects: int, width: int, height: int):
         individuals = [generateIndividual(

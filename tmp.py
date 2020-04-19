@@ -22,8 +22,8 @@ algorithm.start(
     sizeOfPopulation=50,
     numberOfRects=200,
     subPopulationSize=20,
-    maxIter=1,
-    condition=0.95
+    maxIter=5,
+    condition=0.8
 )
 
 

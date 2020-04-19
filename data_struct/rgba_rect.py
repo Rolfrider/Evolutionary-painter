@@ -14,9 +14,6 @@ class RGBARect():
         self.w = w
         self.h = h
 
-    def __add__(self, other):
-        return RGBARect(self.r+other.r, self.g+other.g, self.b+other.b, self.a+other.a, self.x+other.x, self.y+other.y, self.w+other.w, self.h+other.h)
-
     def meanWith(self, other):
         return RGBARect(
             self.__mean(self.r, other.r),
@@ -48,10 +45,6 @@ class RGBARect():
     def __iterpolate(self, first, second, factor):
         result = first*factor + (1 - factor)*second
         return int(result) if isinstance(first, int) else result
-
-    def __floordiv__(self, other):
-        if isinstance(other, int):
-            return RGBARect(self.r//other, self.g//other, self.b//other, self.a//other, self.x//other, self.y//other, self.w//other, self.h//other)
 
     def mutateDeviation(self, other):
         self.r *= other.r
