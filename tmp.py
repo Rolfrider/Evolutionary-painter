@@ -2,6 +2,7 @@ from image_processing.comparator import Comparator
 from data_struct.rgba_rect import RGBARect
 from image_processing.creator import createImage
 from evolutionary_algorithm.algorithm import Algorithm
+from evolutionary_algorithm.picking import *
 from PIL import Image
 
 
@@ -21,14 +22,18 @@ algorithm.start(
     sizeOfPopulation=50,
     numberOfRects=200,
     subPopulationSize=20,
-    maxIter=100,
+    maxIter=1,
     condition=0.95
 )
 
+
 comp = Comparator(image)
-individualImage = createImage(
-    algorithm.population.bestIndividual(comp)[0], image.size[0], image.size[1])
-individualImage.show()
+resultWheel = pick(algorithm.population, comp, RouletteWheelStrategy(), 10)
+resultRank = pick(algorithm.population, comp, RankingSelectionStrategy(), 10)
+print(resultRank)
+# individualImage = createImage(
+#     algorithm.population.bestIndividual(comp)[0], image.size[0], image.size[1])
+# individualImage.show()
 
 # for individual in algorithm.population.individuals:
 
