@@ -34,7 +34,7 @@ class IndividualRect:
         self.rect.correct(width, height)
 
     def __multiply(self, number_of_rects: int, randomN: float) -> float:
-        return exp((1/sqrt(2*number_of_rects))*randomN+(1/sqrt(2*sqrt(number_of_rects)))*random.normal())
+        return exp((1/sqrt(2*number_of_rects*8))*randomN+(1/sqrt(2*sqrt(number_of_rects*8)))*random.normal())
 
 
 class Individual:
@@ -52,6 +52,7 @@ class Individual:
         randomFactor = random.normal()
         for x in self.data:
             x.mutate(len(self.data), randomFactor)
+        self.score = None
 
     def correct(self, width: int, height: int):
         for x in self.data:

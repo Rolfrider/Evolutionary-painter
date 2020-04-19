@@ -15,15 +15,15 @@ from PIL import Image
 #     RGBARect(200, 100, 105, 1, 400, 100, 100, 200),
 #     RGBARect(200, 100, 205, 0.6, 220, 210, 200, 250),
 # ]
-image = Image.open("YouDidIt.png")
+image = Image.open("simple_img.jpg")
 algorithm = Algorithm()
 algorithm.start(
     image,
-    size_of_population=60,
-    number_of_rects=200,
-    subpopulation_size=30,
-    maxIter=100,
-    condition=0.8
+    size_of_population=100,
+    number_of_rects=10,
+    subpopulation_size=50,
+    maxIter=10000,
+    condition=0.95
 )
 
 
