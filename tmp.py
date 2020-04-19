@@ -27,10 +27,10 @@ algorithm.start(
 )
 
 
-comp = Comparator(image)
-resultWheel = pick(algorithm.population, comp, RouletteWheelStrategy(), 10)
-resultRank = pick(algorithm.population, comp, RankingSelectionStrategy(), 10)
-print(resultRank)
+# comp = Comparator(image)
+# resultWheel = pick(algorithm.population, comp, RouletteWheelStrategy(), 10)
+# resultRank = pick(algorithm.population, comp, RankingSelectionStrategy(), 10)
+# print(resultRank)
 # individualImage = createImage(
 #     algorithm.population.bestIndividual(comp)[0], image.size[0], image.size[1])
 # individualImage.show()

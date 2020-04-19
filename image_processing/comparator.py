@@ -1,6 +1,7 @@
 from PIL import Image, ImageChops
 from typing import List
 from data_struct.rgba_rect import RGBARect
+from evolutionary_algorithm.individual import Individual
 from image_processing.creator import create_image
 import numpy
 
@@ -10,7 +11,7 @@ class Comparator:
     def __init__(self, image: Image):
         self.refImage = image
 
-    def evaluate(self, individual: List[RGBARect]) -> float:
+    def evaluate(self, individual: Individual) -> float:
         image = create_image(
             individual, self.refImage.size[0], self.refImage.size[1])
         diffImage = ImageChops.difference(self.refImage.convert('RGBA'), image)
