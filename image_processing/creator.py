@@ -4,21 +4,21 @@ from data_struct.rgba_rect import RGBARect
 from evolutionary_algorithm.individual import Individual
 
 
-def createImage(individual: Individual, width: int, height: int) -> Image:
-    finalImage = Image.new('RGBA', (width, height))
-    finalDraw = ImageDraw.Draw(finalImage)
+def create_image(individual: Individual, width: int, height: int) -> Image:
+    final_image = Image.new('RGBA', (width, height))
+    final_draw = ImageDraw.Draw(final_image)
     for rect in map(lambda x: x.rect, individual.data):
         image = Image.new('RGBA', (rect.w, rect.h))
         draw = ImageDraw.Draw(image)
-        draw.rectangle(calcVertexes(rect),
+        draw.rectangle(calc_vertexes(rect),
                        (rect.r, rect.g, rect.b, rect.a))
-        finalDraw.bitmap(
+        final_draw.bitmap(
             (rect.x, rect.y),
             image,
             (rect.r, rect.g, rect.b, rect.a)
         )
-    return finalImage
+    return final_image
 
 
-def calcVertexes(rect: RGBARect) -> (int, int, int, int):
+def calc_vertexes(rect: RGBARect) -> (int, int, int, int):
     return (rect.x, rect.y, rect.x + rect.w, rect.y + rect.h)

@@ -15,25 +15,25 @@ class IndividualRect:
         new_deviation = strategy.cross(self.deviation, other.deviation)
         return IndividualRect(new_rect, new_deviation)
 
-    def mutate(self, numberOfRects: int, randomN: float):
-        multiRect = RGBARect(
-            self.__multiply(numberOfRects, randomN), 
-            self.__multiply(numberOfRects, randomN), 
-            self.__multiply(numberOfRects, randomN), 
-            self.__multiply(numberOfRects, randomN), 
-            self.__multiply(numberOfRects, randomN), 
-            self.__multiply(numberOfRects, randomN), 
-            self.__multiply(numberOfRects, randomN), 
-            self.__multiply(numberOfRects, randomN)
+    def mutate(self, number_of_rects: int, randomN: float):
+        multi_rect = RGBARect(
+            self.__multiply(number_of_rects, randomN), 
+            self.__multiply(number_of_rects, randomN), 
+            self.__multiply(number_of_rects, randomN), 
+            self.__multiply(number_of_rects, randomN), 
+            self.__multiply(number_of_rects, randomN), 
+            self.__multiply(number_of_rects, randomN), 
+            self.__multiply(number_of_rects, randomN), 
+            self.__multiply(number_of_rects, randomN)
         )
-        self.deviation.mutateDeviation(multiRect)
-        self.rect.mutateRect(self.deviation)
+        self.deviation.mutate_deviation(multi_rect)
+        self.rect.mutate_rect(self.deviation)
 
     def correct(self, width:int, height:int):
         self.rect.correct(width, height)
 
-    def __multiply(self, numberOfRects: int, randomN: float) -> float:
-        return exp((1/sqrt(2*numberOfRects))*randomN+(1/sqrt(2*sqrt(numberOfRects)))*random.normal())
+    def __multiply(self, number_of_rects: int, randomN: float) -> float:
+        return exp((1/sqrt(2*number_of_rects))*randomN+(1/sqrt(2*sqrt(number_of_rects)))*random.normal())
 
         
 

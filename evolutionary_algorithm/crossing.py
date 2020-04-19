@@ -13,7 +13,7 @@ class CrossingStrategy(ABC):
 class MeanCrossing(CrossingStrategy):
 
     def cross(self, first: RGBARect, second: RGBARect) -> RGBARect:
-        return first.meanWith(second)
+        return first.mean_with(second)
 
 
 class InterpolateCrossing(CrossingStrategy):
@@ -26,4 +26,4 @@ class InterpolateCrossing(CrossingStrategy):
             self.factor = factor
 
     def cross(self, first: RGBARect, second: RGBARect) -> RGBARect:
-        return first.interpolate(second, factor)
+        return first.interpolate(second, self.factor)

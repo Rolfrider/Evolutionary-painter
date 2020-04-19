@@ -1,6 +1,6 @@
 from image_processing.comparator import Comparator
 from data_struct.rgba_rect import RGBARect
-from image_processing.creator import createImage
+from image_processing.creator import create_image
 from evolutionary_algorithm.algorithm import Algorithm
 from evolutionary_algorithm.picking import *
 from PIL import Image
@@ -19,9 +19,9 @@ image = Image.open("YouDidIt.png")
 algorithm = Algorithm()
 algorithm.start(
     image,
-    sizeOfPopulation=50,
-    numberOfRects=200,
-    subPopulationSize=20,
+    size_of_population=50,
+    number_of_rects=200,
+    subpopulation_size=20,
     maxIter=5,
     condition=0.8
 )

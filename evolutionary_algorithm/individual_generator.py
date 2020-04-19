@@ -1,25 +1,22 @@
-from random import seed
-from random import randint
-from random import random
+from random import random, randint
 from data_struct.rgba_rect import RGBARect
 from evolutionary_algorithm.individual import Individual, IndividualRect
 
 
-def generateIndividual(numberOfRects: int, width: int, height: int):
-    rects = [generateRandomRects(width, height)
-             for i in range(0, numberOfRects)]
-    deviations = [genreateRectWithValue(100) for i in range(0, numberOfRects)]
-    data = list(map(createDataChunk, zip(rects, deviations)))
+def generate_individual(number_of_rects: int, width: int, height: int):
+    rects = [generate_random_rects(width, height)
+             for i in range(0, number_of_rects)]
+    deviations = [genreate_rect_with_value(100) for i in range(0, number_of_rects)]
+    data = list(map(create_data_chunk, zip(rects, deviations)))
 
     return Individual(data)
 
 
-def createDataChunk(chunk: (RGBARect, RGBARect)) -> IndividualRect:
+def create_data_chunk(chunk: (RGBARect, RGBARect)) -> IndividualRect:
     return IndividualRect(chunk[0], chunk[1])
 
 
-def generateRandomRects(width: int, height: int) -> RGBARect:
-    seed()
+def generate_random_rects(width: int, height: int) -> RGBARect:
     r = randint(0, 255)
     g = randint(0, 255)
     b = randint(0, 255)
@@ -31,5 +28,5 @@ def generateRandomRects(width: int, height: int) -> RGBARect:
     return RGBARect(r, g, b, a, x, y, w, h)
 
 
-def genreateRectWithValue(value) -> RGBARect:
+def genreate_rect_with_value(value) -> RGBARect:
     return RGBARect(value, value, value, value, value, value, value, value)

@@ -14,7 +14,7 @@ class RGBARect():
         self.w = w
         self.h = h
 
-    def meanWith(self, other):
+    def mean_with(self, other):
         return RGBARect(
             self.__mean(self.r, other.r),
             self.__mean(self.g, other.g),
@@ -46,7 +46,7 @@ class RGBARect():
         result = first*factor + (1 - factor)*second
         return int(result) if isinstance(first, int) else result
 
-    def mutateDeviation(self, other):
+    def mutate_deviation(self, other):
         self.r *= other.r
         self.g *= other.g
         self.b *= other.b
@@ -56,7 +56,7 @@ class RGBARect():
         self.w *= other.w
         self.h *= other.h
 
-    def mutateRect(self, deviation):
+    def mutate_rect(self, deviation):
         self.r = int(self.r + deviation.r*random.normal())
         self.g = int(self.g + deviation.g*random.normal())
         self.b = int(self.b + deviation.b*random.normal())
