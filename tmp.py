@@ -19,10 +19,10 @@ image = Image.open("YouDidIt.png")
 algorithm = Algorithm()
 algorithm.start(
     image,
-    size_of_population=50,
+    size_of_population=60,
     number_of_rects=200,
-    subpopulation_size=20,
-    maxIter=5,
+    subpopulation_size=30,
+    maxIter=100,
     condition=0.8
 )
 

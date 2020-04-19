@@ -4,10 +4,11 @@ from typing import List
 from evolutionary_algorithm.crossing import *
 from image_processing.comparator import Comparator
 
+
 class Population:
     def __init__(self, individuals: List[Individual]):
         self.individuals = individuals
-    
+
     def create_subpopulation(self, subpopulation_size: int):
         new_individuals = []
         for i in range(0, subpopulation_size):
@@ -16,26 +17,25 @@ class Population:
         return Population(new_individuals)
 
     def create_offspring_by_crossing(self, crossing_strategy: CrossingStrategy):
-        return Population([individual.cross(self.individuals[(index+1)%len(self.individuals)], crossing_strategy) for index, individual in enumerate(self.individuals)])
+        return Population([individual.cross(self.individuals[(index+1) % len(self.individuals)], crossing_strategy) for index, individual in enumerate(self.individuals)])
 
     def best_individual(self, comp: Comparator):
-        fitting = [comp.evaluate(x) for x in self.individuals]
+        fitting = [x.evaluate(comp) for x in self.individuals]
         best = 0
-        index = -1
-        for i in range(0, len(fitting)):
-            if best<fitting[i]:
-                best = fitting[i]
-                index = i
-        return self.individuals[index], best
+        score = 0
+        for indi, points in zip(self.individuals, fitting):
+            if points > score:
+                best = indi
+                score = points
+        return best, score
 
     def mutate(self):
         for individual in self.individuals:
             individual.mutate()
 
-    def correct(self, width:int, height:int):
+    def correct(self, width: int, height: int):
         for individual in self.individuals:
             individual.correct(width, height)
 
     def plus(self, other):
         return Population(self.individuals + other.individuals)
-

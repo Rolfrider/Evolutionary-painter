@@ -44,7 +44,7 @@ class RankingSelectionStrategy(PickingStrategy):
 
 
 def pick(population: Population, comp: Comparator, picking_startegy: PickingStrategy, size_of_population: int) -> Population:
-    fitting = [comp.evaluate(individual)
+    fitting = [individual.evaluate(comp)
                for individual in population.individuals]
     mapped_fitting = zip(population.individuals, fitting)
     new_population = picking_startegy.pick(list(mapped_fitting), size_of_population)
