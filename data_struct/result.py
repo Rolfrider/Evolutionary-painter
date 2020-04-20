@@ -21,6 +21,8 @@ class Result:
     def add_point(self, score, iter):
         if len(self.scores) > 0 and len(self.iters) > 0:
             last_scores = self.scores[-1]
+            if last_scores == score:
+                return
             self.scores.append(last_scores)
             self.iters.append(iter-1)
 

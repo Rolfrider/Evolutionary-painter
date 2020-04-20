@@ -56,9 +56,8 @@ class Algorithm:
             result.finalIter = iter
         individual_image = create_image(
             best_individual, image.size[0], image.size[1])
-        individual_image.show()
 
-        return result
+        return (result, individual_image)
 
     def create_initial_population(self, size_of_population: int, number_of_rects: int, width: int, height: int):
         individuals = [generate_individual(
