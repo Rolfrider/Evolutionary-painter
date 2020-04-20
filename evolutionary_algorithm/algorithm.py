@@ -7,6 +7,7 @@ from image_processing.comparator import Comparator
 from image_processing.creator import create_image
 from evolutionary_algorithm.individual_generator import generate_individual
 from PIL import Image
+from data_struct.result import Result
 
 
 class Algorithm:
@@ -18,6 +19,10 @@ class Algorithm:
         self.population = None
 
     def start(self, image: Image, size_of_population: int, number_of_rects: int, subpopulation_size: int, maxIter: int, condition: float):
+        result = Result()
+        result.popultion = size_of_population
+        result.subpopulation = subpopulation_size
+        result.number_of_rect = number_of_rects
 
         width, height = image.size
         self.comp = Comparator(image)
@@ -41,15 +46,19 @@ class Algorithm:
 
             best_individual, best_fitting = self.population.best_individual(
                 self.comp)
+            result.add_point(best_fitting, iter)
             iter += 1
-            print(iter)
-            print(best_fitting)
+            print("Iteration:", iter, ", Fitting:", best_fitting)
             if best_fitting >= condition:
                 break
 
+            result.finalScore = best_fitting
+            result.finalIter = iter
         individual_image = create_image(
             best_individual, image.size[0], image.size[1])
         individual_image.show()
+
+        return result
 
     def create_initial_population(self, size_of_population: int, number_of_rects: int, width: int, height: int):
         individuals = [generate_individual(
