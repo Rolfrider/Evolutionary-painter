@@ -17,15 +17,15 @@ from random import seed
 #     RGBARect(200, 100, 105, 255, 400, 100, 100, 200),
 #     RGBARect(200, 100, 205, 145, 220, 210, 200, 250),
 # ]
-image = Image.open("simple_img.jpg")
+image = Image.open("YouDidIt.png")
 seed()
 algorithm = Algorithm()
 algorithm.start(
     image,
-    size_of_population=20,
+    size_of_population=30,
     number_of_rects=20,
-    subpopulation_size=15,
-    maxIter=10000,
+    subpopulation_size=12,
+    maxIter=1000,
     condition=0.95
 )
 # rects = list(map(lambda x: IndividualRect(x, x), individual))

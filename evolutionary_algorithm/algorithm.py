@@ -22,29 +22,26 @@ class Algorithm:
         width, height = image.size
         self.comp = Comparator(image)
         iter = 0
-        
+
         self.population = self.create_initial_population(
             size_of_population, number_of_rects, width, height)
         while iter != maxIter:
-            
+
             subpopulation = self.population.create_subpopulation(
                 subpopulation_size)
 
-            
             offspring = subpopulation.create_offspring_by_crossing(
                 self.crossing_strategy)
-            
-            offspring.mutate()
-            offspring.correct(width, height)
 
-            
+            offspring.mutate()
+
             sum_of_populations = self.population.plus(offspring)
             self.population = pick(
                 sum_of_populations, self.comp, self.picking_strategy, size_of_population)
-           
+
             best_individual, best_fitting = self.population.best_individual(
                 self.comp)
-            iter += 1  
+            iter += 1
             print(iter)
             print(best_fitting)
             if best_fitting >= condition:
