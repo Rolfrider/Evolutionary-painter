@@ -1,18 +1,19 @@
 from PIL import Image, ImageDraw
 from typing import List
 from data_struct.rgba_rect import RGBARect
+from evolutionary_algorithm.individual import Individual
 
 
-def createImage(individual: List[RGBARect], width: int, height: int) -> Image:
-    finalImage = Image.new('RGBA', (width, height))
-    for rect in individual:
+def create_image(individual: Individual, width: int, height: int) -> Image:
+    final_image = Image.new('RGBA', (width, height))
+    for rect in map(lambda x: x.rect, individual.data):
         image = Image.new('RGBA', (width, height))
         draw = ImageDraw.Draw(image)
-        draw.rectangle(calcVertexes(rect),
-                       (rect.r, rect.g, rect.b, int(rect.a * 255)))
-        finalImage = Image.alpha_composite(finalImage, image)
-    return finalImage
+        draw.rectangle(calc_vertexes(rect),
+                       (rect.r, rect.g, rect.b, rect.a))
+        final_image = Image.alpha_composite(final_image, image)
+    return final_image
 
 
-def calcVertexes(rect: RGBARect) -> (int, int, int, int):
+def calc_vertexes(rect: RGBARect) -> (int, int, int, int):
     return (rect.x, rect.y, rect.x + rect.w, rect.y + rect.h)

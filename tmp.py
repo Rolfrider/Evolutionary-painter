@@ -1,22 +1,45 @@
 from image_processing.comparator import Comparator
 from data_struct.rgba_rect import RGBARect
-from image_processing.creator import createImage
-
-individual = [
-    RGBARect(255, 0, 0, 0.5, 10, 0, 100, 200),
-    RGBARect(0, 255, 0, 0.5, 50, 0, 100, 200),
-    RGBARect(0, 0, 255, 0.5, 30, 100, 100, 200),
-    RGBARect(90, 100, 155, 0.5, 100, 100, 300, 300),
-    RGBARect(0, 100, 25, 0.5, 290, 190, 200, 200),
-    RGBARect(200, 100, 105, 1, 400, 100, 100, 200),
-    RGBARect(200, 100, 205, 0.6, 220, 210, 200, 250),
-]
-
-individualImage = createImage(individual, 500, 500)
-individualImage.show()
+from image_processing.creator import create_image
+from evolutionary_algorithm.algorithm import Algorithm
+from evolutionary_algorithm.picking import *
+from evolutionary_algorithm.individual import *
+from PIL import Image
+from random import seed
 
 
-comp = Comparator("YouDidIt.png")
-percent = comp.evaluate(individual)
+# individual = [
+#     RGBARect(255, 0, 0, 125, 10, 0, 100, 200),
+#     RGBARect(0, 255, 0, 125, 50, 0, 100, 200),
+#     # RGBARect(0, 0, 255, 125, 30, 100, 100, 200),
+#     RGBARect(90, 100, 155, 125, 100, 100, 300, 300),
+#     RGBARect(0, 100, 25, 125, 290, 190, 200, 200),
+#     RGBARect(200, 100, 105, 255, 400, 100, 100, 200),
+#     RGBARect(200, 100, 205, 145, 220, 210, 200, 250),
+# ]
+image = Image.open("YouDidIt.png")
+seed()
+algorithm = Algorithm()
+algorithm.start(
+    image,
+    size_of_population=30,
+    number_of_rects=20,
+    subpopulation_size=12,
+    maxIter=1000,
+    condition=0.95
+)
+# rects = list(map(lambda x: IndividualRect(x, x), individual))
+# img = create_image(Individual(rects), 600, 600)
+# img.show()
+# comp = Comparator(image)
+# resultWheel = pick(algorithm.population, comp, RouletteWheelStrategy(), 10)
+# resultRank = pick(algorithm.population, comp, RankingSelectionStrategy(), 10)
+# print(resultRank)
+# individualImage = createImage(
+#     algorithm.population.bestIndividual(comp)[0], image.size[0], image.size[1])
+# individualImage.show()
 
-print(percent)
+# for individual in algorithm.population.individuals:
+
+#     percent = comp.evaluate(individual)
+#     print(percent)
