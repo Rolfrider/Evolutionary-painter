@@ -1,5 +1,5 @@
 from evolutionary_algorithm.algorithm import Algorithm
-from evolutionary_algorithm.crossing import MeanCrossing, InterpolateCrossing
+from evolutionary_algorithm.picking import BestFittingStrategy, RouletteWheelStrategy, RankingSelectionStrategy
 from PIL import Image
 import matplotlib.pyplot as plt
 
@@ -13,10 +13,10 @@ subpopulation = 30
 target = 0.99
 
 
-def examine_mean_strategy(iter_limit: int = 1000):
-    algorithm.crossing_strategy = MeanCrossing()
+def examine_best_fitting_strategy(iter_limit: int = 1000):
+    algorithm.picking_strategy = BestFittingStrategy()
     all_results = []
-    title = "mean_crossing_"
+    title = "best_fitting_crossing_"
     for i in range(0, 5):
         result, image = algorithm.start(
             test_image,
@@ -27,17 +27,17 @@ def examine_mean_strategy(iter_limit: int = 1000):
             target
         )
         result.title = title + str(i)
-        result.save("data/crossing")
+        result.save("data/picking")
         all_results.append(result)
-        image_name = "data/crossing/" + title + str(i) + ".png"
+        image_name = "data/picking/" + title + str(i) + ".png"
         image.save(image_name)
     save_plot(title, all_results)
 
 
-def examine_interpolate_strategy(iter_limit: int = 1000):
-    algorithm.crossing_strategy = InterpolateCrossing()
+def examine_roulette_strategy(iter_limit: int = 1000):
+    algorithm.picking_strategy = RouletteWheelStrategy()
     all_results = []
-    title = "interpolate_crossing_"
+    title = "roulette_crossing_"
     for i in range(0, 5):
         result, image = algorithm.start(
             test_image,
@@ -48,9 +48,30 @@ def examine_interpolate_strategy(iter_limit: int = 1000):
             target
         )
         result.title = title + str(i)
-        result.save("data/crossing")
+        result.save("data/picking")
         all_results.append(result)
-        image_name = "data/crossing/" + title + str(i) + ".png"
+        image_name = "data/picking/" + title + str(i) + ".png"
+        image.save(image_name)
+    save_plot(title, all_results)
+
+
+def examine_ranking_strategy(iter_limit: int = 1000):
+    algorithm.picking_strategy = RankingSelectionStrategy()
+    all_results = []
+    title = "ranking_crossing_"
+    for i in range(0, 5):
+        result, image = algorithm.start(
+            test_image,
+            population,
+            number_of_rect,
+            subpopulation,
+            iter_limit,
+            target
+        )
+        result.title = title + str(i)
+        result.save("data/picking")
+        all_results.append(result)
+        image_name = "data/picking/" + title + str(i) + ".png"
         image.save(image_name)
     save_plot(title, all_results)
 
@@ -65,4 +86,4 @@ def save_plot(title: str, results):
     plt.xlabel("Iterations")
     plt.ylabel("Score")
     plt.legend(loc='best')
-    fig.savefig("data/crossing/" + title + ".pdf")
+    fig.savefig("data/picking/" + title + ".pdf")
