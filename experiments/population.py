@@ -21,7 +21,7 @@ def examine_population(iter_limit: int = 1000, populations=[2, 10, 15, 30, 40, 5
                 test_image,
                 population,
                 number_of_rect,
-                int(population*1.5),  # testować na stałej czy procentowej 🤔
+                int(population*1.5),
                 iter_limit,
                 target
             )
@@ -34,7 +34,7 @@ def examine_population(iter_limit: int = 1000, populations=[2, 10, 15, 30, 40, 5
         save_plot(title + str(population), all_results)
 
 
-def examine_subpopulation(iter_limit: int = 1000, subpopulations=[2, 10, 15, 30, 40, 50, 100]):
+def examine_subpopulation(iter_limit: int = 1000, subpopulations=[1.1, 1.3, 1.5, 2, 2.5, 3]):
     algorithm.crossing_strategy = MeanCrossing()
     title = "subpopulation_size_"
     for subpopulation in subpopulations:
@@ -42,9 +42,9 @@ def examine_subpopulation(iter_limit: int = 1000, subpopulations=[2, 10, 15, 30,
         for i in range(0, 5):
             result, image = algorithm.start(
                 test_image,
-                30,
+                50,
                 number_of_rect,
-                subpopulation,
+                int(50*subpopulation),
                 iter_limit,
                 target
             )

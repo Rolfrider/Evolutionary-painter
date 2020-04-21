@@ -1,1 +1,1 @@
-{"title": "population_size_2_0", "popultion": 2, "subpopulation": 3, "number_of_rect": 20, "scores": [0.5260677042117295], "iters": [0], "finalScore": 0.5260677042117295, "finalIter": 5}
+{"title": "population_size_2_0", "popultion": 2, "subpopulation": 3, "number_of_rect": 20, "scores": [0.5489321052785838, 0.5489321052785838, 0.5511170608751722], "iters": [0, 2, 3], "finalScore": 0.5511170608751722, "finalIter": 5}
