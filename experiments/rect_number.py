@@ -15,9 +15,9 @@ target = 0.99
 
 def examine_rect_number(iter_limit: int = 1000, rect_numbers: [int] = [10, 20, 50, 100, 200, 300]):
     algorithm.picking_strategy = BestFittingStrategy()
-    all_results = []
     title = "number_of_rect_"
     for rect in rect_numbers:
+        all_results = []
         for i in range(0, 5):
             result, image = algorithm.start(
                 test_image,

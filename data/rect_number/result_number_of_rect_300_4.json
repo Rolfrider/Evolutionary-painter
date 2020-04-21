@@ -1,1 +1,1 @@
-{"title": "number_of_rect_300_4", "popultion": 10, "subpopulation": 15, "number_of_rect": 300, "scores": [0.7554882323631994], "iters": [0], "finalScore": 0.7554882323631994, "finalIter": 2}
+{"title": "number_of_rect_300_4", "popultion": 10, "subpopulation": 15, "number_of_rect": 300, "scores": [0.7345968815029749, 0.7345968815029749, 0.7350386001934406], "iters": [0, 1, 2], "finalScore": 0.7350386001934406, "finalIter": 5}
