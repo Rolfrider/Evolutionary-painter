@@ -1,6 +1,7 @@
 from evolutionary_algorithm.algorithm import Algorithm
 from evolutionary_algorithm.crossing import MeanCrossing, InterpolateCrossing
 from PIL import Image
+import matplotlib.pyplot as plt
 
 test_image = Image.open("simple_img.jpg")
 
@@ -14,8 +15,9 @@ target = 0.99
 
 def examine_mean_strategy(iter_limit: int = 1000):
     algorithm.crossing_strategy = MeanCrossing()
+    all_results = []
+    title = "mean_crossing_"
     for i in range(0, 5):
-        title = "mean_crossing_" + str(i)
         result, image = algorithm.start(
             test_image,
             population,
@@ -24,16 +26,19 @@ def examine_mean_strategy(iter_limit: int = 1000):
             iter_limit,
             target
         )
-        result.title = title
-        result.save()
-        image_name = "data/" + title + ".png"
+        result.title = title + str(i)
+        result.save("data/crossing")
+        all_results.append(result)
+        image_name = "data/crossing/" + title + ".png"
         image.save(image_name)
+    save_plot(title, all_results)
 
 
 def examine_interpolate_strategy(iter_limit: int = 1000):
     algorithm.crossing_strategy = InterpolateCrossing()
+    all_results = []
+    title = "interpolate_crossing_"
     for i in range(0, 5):
-        title = "interpolate_crossing_" + str(i)
         result, image = algorithm.start(
             test_image,
             population,
@@ -42,7 +47,22 @@ def examine_interpolate_strategy(iter_limit: int = 1000):
             iter_limit,
             target
         )
-        result.title = title
-        result.save()
-        image_name = "data/" + title + ".png"
+        result.title = title + str(i)
+        result.save("data/crossing")
+        all_results.append(result)
+        image_name = "data/crossing/" + title + ".png"
         image.save(image_name)
+    save_plot(title, all_results)
+
+
+def save_plot(title: str, results):
+    fig = plt.figure()
+    for n, result in enumerate(results):
+        label = "test_" + str(n)
+        plt.plot(result.iters, result.scores, label=label)
+
+    plt.title(title)
+    plt.xlabel("Iterations")
+    plt.ylabel("Score")
+    plt.legend(loc='best')
+    fig.savefig("data/crossing/" + title + ".pdf")

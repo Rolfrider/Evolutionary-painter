@@ -13,8 +13,8 @@ class Result:
         self.finalScore = 0
         self.finalIter = 0
 
-    def save(self):
-        file_name = "data/result_" + self.title + ".json"
+    def save(self, folder_name):
+        file_name = folder_name + "/result_" + self.title + ".json"
         with open(file_name, "w") as file:
             json.dump(self.__dict__, file)
 
