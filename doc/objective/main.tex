@@ -3,7 +3,7 @@
 \usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
 
-\title{Ewolucyjny malarz \\ \large Cel projektu}
+\title{Ewolucyjny malarz }%\\ \large Cel projektu}
 \author{Rafał Kwiatkowski, Franciszek Sioma}
 
 
@@ -11,9 +11,12 @@
 \pagenumbering{gobble}
 \maketitle
 
-Celem projektu {\it Ewolucyjny Malarz} jest stworzenie aplikacji wykorzystującej algorytm ewolucyjny, która na wejściu przyjmuje kolorowy obrazek, a na wyjściu zwraca możliwe jak najdokładniejsze odwzorowanie tego obrazu przy użyciu prostokątów RGBA. 
+\section{Opis projektu}
+\subsection{Cel projektu}
+Celem projektu {\it Ewolucyjny Malarz} było stworzenie aplikacji wykorzystującej algorytm ewolucyjny. Aplikacja przyjmuje na wejściu kolorowy obrazek, a na wyjściu zwraca możliwe jak najdokładniejsze odwzorowanie obrazu wejściowego przy użyciu prostokątów RGBA. 
 
-W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Osobnik}. W naszym przypadku osobnikiem będzie obraz stworzony z {\it n} prostokątów RGBA. Każdy prostokąt będzie się składał z 8 wartości: 
+\subsection{Przyjęte założenia}
+W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Osobnik}. W naszym przypadku osobnikiem jest obraz stworzony z {\it n} prostokątów RGBA. Każdy prostokąt składa się z 8 wartości: 
 \begin{description}
     \item[R] kanał czerwony
     \item[G] kanał zielony
@@ -27,6 +30,14 @@ W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Oso
 
 Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania ({\it J}). W naszym przypadku funkcja ta będzie przyjmować wartości od 0 do 1 i będzie obliczana na podstawie porównywania piksel po pikselu obrazu stworzonego przez osobnika z obrazem oryginalnym.
 
+Algorytm zakłada dwa rodzaje krzyżowania osobników:
+\begin{itemize}
+    \item uśrednianie
+    \item interpolacja
+\end{itemize}
+W naszym programie postanowiliśmy umieścić oba te sposoby, by móc przebadać ich wpływ na końcowy wynik algorytmu.
+\section{Aplikacja}
+\section{Testy}
 Planujemy wykonać szereg testów, które pomogą nam odpowiedzieć na pytanie jak działa aplikacja w zależności od następujących parametrów:
 \begin{itemize}
     \item liczebność populacji
@@ -34,4 +45,6 @@ Planujemy wykonać szereg testów, które pomogą nam odpowiedzieć na pytanie j
     \item strategia krzyżowania
     \item strategia mutowania
 \end{itemize}
+\subsection{Przeprowadzone testy}
+\subsection{Wyniki}
 \end{document}
