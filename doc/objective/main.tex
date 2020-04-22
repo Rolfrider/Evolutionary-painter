@@ -29,22 +29,24 @@ W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Oso
 \end{description}
 
 Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania ({\it J}). W naszym przypadku funkcja ta będzie przyjmować wartości od 0 do 1 i będzie obliczana na podstawie porównywania piksel po pikselu obrazu stworzonego przez osobnika z obrazem oryginalnym.
-
+\subsection{Wkład autorów}
+\begin{itemize}
+    \item Obsługa obrazów - Rafał Kwiatkowski
+    \item Algorytm Ewolucyjny - Franciszek Sioma
+    \item Testy i eksperymenty - Rafał Kwiatkowski
+    \item Dokumentacja - Franciszek Sioma
+\end{itemize}
+\subsection{Decyzje projektowe}
 Algorytm zakłada dwa rodzaje krzyżowania osobników:
 \begin{itemize}
     \item uśrednianie
     \item interpolacja
 \end{itemize}
 W naszym programie postanowiliśmy umieścić oba te sposoby, by móc przebadać ich wpływ na końcowy wynik algorytmu.
-\section{Aplikacja}
-\subsection{Pakiety}
-Kod aplikacji podzieliliśmy na kilka pakietów w celu organizacji pracy oraz by kod był przejrzysty.
-\begin{itemize}
-    \item data\_stuct - zawiera definicję prostokątów, które tworzą {\it Osobnika} oraz metody z nim związane
-    \item evolutionary\_algorithm - zawiera implementację algorytmu wraz z definicjami takich elementów jak {\it Osobnik}, {\it Populacja} czy {\it krzyżowanie}
-    \item experiments - zawiera definicję eksperymentów przeprowadzanych na utworzonej aplikacji
-    \item image\_processing - zawiera klasy i metody odpowiedzialne za wyświetlenie obrazu
-\end{itemize}
+\subsection{Wykorzystane narzędzia i biblioteki}
+Do napisania aplikacji użyliśmy języka Python w wersji: 3.8, dokumentacja została stworzona przy użyciu języka Latex, a IDE z którego korzystaliśmy to Visual Studio Code. Użyliśmy również systemu kontroli wersji Git.
+Spis użytych bibliotek znajduje się w pliku {\it requirements.txt}.
+
 \section{Testy}
 Planujemy wykonać szereg testów, które pomogą nam odpowiedzieć na pytanie jak działa aplikacja w zależności od następujących parametrów:
 \begin{itemize}
