@@ -42,9 +42,9 @@ def examine_subpopulation(iter_limit: int = 1000, subpopulations=[1.1, 1.3, 1.5,
         for i in range(0, 5):
             result, image = algorithm.start(
                 test_image,
-                50,
+                40,
                 number_of_rect,
-                int(50*subpopulation),
+                int(40*subpopulation),
                 iter_limit,
                 target
             )
