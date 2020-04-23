@@ -16,7 +16,7 @@ target = 0.99
 def examine_best_fitting_strategy(iter_limit: int = 1000):
     algorithm.picking_strategy = BestFittingStrategy()
     all_results = []
-    title = "best_fitting_crossing_"
+    title = "best_fitting_picking_"
     for i in range(0, 5):
         result, image = algorithm.start(
             test_image,
@@ -37,7 +37,7 @@ def examine_best_fitting_strategy(iter_limit: int = 1000):
 def examine_roulette_strategy(iter_limit: int = 1000):
     algorithm.picking_strategy = RouletteWheelStrategy()
     all_results = []
-    title = "roulette_crossing_"
+    title = "roulette_picking_"
     for i in range(0, 5):
         result, image = algorithm.start(
             test_image,
@@ -58,7 +58,7 @@ def examine_roulette_strategy(iter_limit: int = 1000):
 def examine_ranking_strategy(iter_limit: int = 1000):
     algorithm.picking_strategy = RankingSelectionStrategy()
     all_results = []
-    title = "ranking_crossing_"
+    title = "ranking_picking_"
     for i in range(0, 5):
         result, image = algorithm.start(
             test_image,
