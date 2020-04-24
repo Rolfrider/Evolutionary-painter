@@ -9,7 +9,13 @@ Wykonaliśmy szereg testów, sprawdzających jak działa aplikacja w zależnośc
 \end{itemize}
 
 \subsection{Eksperymenty i wyniki}
-W celu uzyskania możliwie jak najbardziej prawdziwych wyników dla każdego przypadku testowego, każdy eksperyment z danymi parametrami był przeprowadzony 5 razy. Wszystkie testy zostały wykonane dla obrazu {\it simple\_img.jpg} oraz dla z warunkami zakończenia 1000 iteracji lub dokładność 99\%. Gdy nie było to przedmiotem eksperymentu to metodą krzyżowania było uśrednianie, a metodą wybierania - wybór najlepszych. Wykresy są tworzonę na podstawie punktów w których zmieniała się wartość funkcji dopasowania dla najlepszego osbnika, dlatego niektóre przebiegi kończą się wcześniej. Oznacza to, że wynik się nie zmienił już do końca eksperymentu.
+W celu uzyskania możliwie jak najbardziej prawdziwych wyników dla każdego przypadku testowego, każdy eksperyment z danymi parametrami był przeprowadzony 5 razy. Wszystkie testy zostały wykonane dla obrazu na Rysunku~\ref{fig:test_image} oraz dla z warunkami zakończenia 1000 iteracji lub dokładność 99\%. 
+\begin{figure}[H]
+    \centering \includegraphics[width=0.5\linewidth]{img/simple_img.jpg}
+    \caption{Obrazek użyty w ekseprymentach}
+    \label{fig:test_image}
+\end{figure}
+Gdy nie było to przedmiotem eksperymentu to metodą krzyżowania było uśrednianie, a metodą wybierania - wybór najlepszych. Wykresy są tworzonę na podstawie punktów w których zmieniała się wartość funkcji dopasowania dla najlepszego osbnika, dlatego niektóre przebiegi kończą się wcześniej. Oznacza to, że wynik się nie zmienił już do końca eksperymentu.
 
 \subsection*{Wpływ liczebności populacji}
 Test wpływu liczebności populacji został przeprowadzony dla populacji o wielkościach: 2, 10, 15, 30, 40, 50, 100, liczbie prostokątów w osobniku równej 20, wielkości populacji $\mu$ będącej 1,5 raza większej od wielkości testowanej populacji.
@@ -50,6 +56,8 @@ Dla populacji $\lambda$ - 20, populacji $\mu$ - 30 i liczbie 20 prostokątów w 
     \label{tab:crossing}
 \end{table}
 
+Dość dobrze widać, że w przypadku naszego problemu lepiej się sprawdza uśrednianie. Jeśli chodzi o interpolacje to warto zauważyć że wartości rosną bardzo szybko na początku, a potem zwykle zostają stałe lub niewiele się zmieniają. Może to być spowodowane, że algorytm dość szybko znajduje w naszym przypdaku osobnika z jednym lub kilkoma dużymi kwadrawtami, które potem ciężko rozmnożyć na lepsze osbniki. W przypadku uśredniania osbniki zmieniają się znacznie wolniej i taka sytuacja zachodzi rzadziej. 
+
 \subsection*{Wpływ użytej strategii wybierania kolejnej populacji}
 Dla populacji $\lambda$ - 20, populacji $\mu$ - 30 i liczbie 20 prostokątów w osobniku testy zostały przeprowadzone dla wyboru najlepszych, ruletki i metody rankingu.
 
@@ -83,5 +91,5 @@ Dla populacji $\lambda$ - 20, populacji $\mu$ - 30 i liczbie 20 prostokątów w 
     \caption{Wyniki testów wybierania}
     \label{tab:picking}
 \end{table}
-
+Ciężko stwierdzić, która metoda wybierania jest najlepsza, ale skłaniamy się do preferęcji wyboru najlepszych lub przez ranking. Metoda ruletki wydaje się produkować najsłabsze rezultaty. Metoda wyboru najlepszych w późniejszych fazach traci mocno na efektywności. Metoda rankingu również w późniejszej fazie nieco zwalnia ale nie tak bardzo i wydaje się być dobrym rozwiązaniem dla naszego problemu.
 \subsection{Wnioski}
