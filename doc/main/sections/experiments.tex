@@ -1,0 +1,22 @@
+\section{Eksperymenty}
+Wykonaliśmy szereg testów, sprawdzających jak działa aplikacja w zależności od następujących parametrów:
+\begin{itemize}
+    \item liczebność populacji
+    \item liczebność populacji $\mu$
+    \item liczba prostokątów w osobniku
+    \item strategia krzyżowania
+    \item strategia wybierania kolejnej generacji populacji
+\end{itemize}
+\subsection{Eksperymenty i wyniki}
+W celu uzyskania możliwie jak najbardziej prawdziwych wyników dla każdego przypadku testowego, każdy eksperyment z danymi parametrami był przeprowadzony 5 razy. Wszystkie testy zostały wykonane dla obrazu {\it simple\_img.jpg} oraz dla z warunkami zakończenia 1000 iteracji lub dokładność 99\%. Gdy nie było to przedmiotem eksperymentu to metodą krzyżowania było uśrednianie, a metodą wybierania - wybór najlepszych.
+\subsection*{Wpływ liczebności populacji}
+Test wpływu liczebności populacji został przeprowadzony dla populacji o wielkościach: 2, 10, 15, 30, 40, 50, 100, liczbie prostokątów w osobniku równej 20, wielkości populacji $\mu$ będącej 1,5 raza większej od wielkości testowanej populacji.
+\subsection*{Wpływ liczebności populacji $\mu$}
+Test wpływu liczebności populacji $\mu$ został przeprowadzony dla stałej wielkości populacji $\lambda$ równej 40 na podstawie której kolejne przypadki testowe był obliczane za pomocą wartości procentowych: 110\%(44), 130\%(52),
+150\%(60), 200\%(80), 250\%(100), 300\%(120). Liczba prostokątów w osobniku była równa 20.
+\subsection*{Wpływ liczby prostokątów w osobniku}
+Następny test został przeprowadzony dla następujących liczb prostokątów w osobniku: 10, 20, 50, 100, 200, 300. Wielkość populacji wynosiła 10, podpopulacji 15. Pozostałe parametry zostały niezmienione względem poprzedniego testu. 
+\subsection*{Wpływ użytej strategii krzyżowania}
+
+\subsection*{Wpływ użytej strategii wybierania kolejnej populacji}
+\subsection{Wnioski}
