@@ -1,0 +1,44 @@
+\section{Opis projektu}
+\subsection{Cel projektu}
+Celem projektu {\it Ewolucyjny Malarz} było stworzenie aplikacji wykorzystującej algorytm ewolucyjny. Aplikacja przyjmuje na wejściu kolorowy obrazek, a na wyjściu zwraca możliwe jak najdokładniejsze odwzorowanie obrazu wejściowego przy użyciu prostokątów RGBA. 
+
+\subsection{Przyjęte założenia}
+W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Osobnik}. W naszym przypadku osobnikiem jest obraz stworzony z {\it n} prostokątów RGBA. Każdy prostokąt składa się z 8 wartości: 
+\begin{description}
+    \item[R] kanał czerwony
+    \item[G] kanał zielony
+    \item[B] kanał niebieski
+    \item[A] kanał alpha (mówi o przezroczystości danego piksela)
+    \item[X] pozycja względem osi poziomej
+    \item[Y] pozycja względem osi pionowej
+    \item[W] szerokość
+    \item[H] wysokość       
+\end{description}
+
+Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania ({\it J}). W naszym przypadku funkcja ta będzie przyjmować wartości od 0 do 1 i będzie obliczana na podstawie porównywania piksel po pikselu obrazu stworzonego przez osobnika z obrazem oryginalnym.
+\subsection{Wkład autorów}
+\begin{itemize}
+    \item Obsługa obrazów - Rafał Kwiatkowski
+    \item Algorytm Ewolucyjny - Franciszek Sioma
+    \item Testy i eksperymenty - Rafał Kwiatkowski
+    \item Dokumentacja - Franciszek Sioma
+\end{itemize}
+\subsection{Decyzje projektowe}
+Algorytm zakłada dwa rodzaje krzyżowania osobników:
+\begin{itemize}
+    \item uśrednianie
+    \item interpolacja
+\end{itemize}
+W naszym programie postanowiliśmy umieścić oba te sposoby, by móc przebadać ich wpływ na końcowy wynik algorytmu.
+Taki sam zabieg dotyczy metod wybierania kolejnej generacji populacji. Zaimplementowane metody to:
+\begin{itemize}
+    \item metoda $\mu$ najlepszych
+    \item metoda koła ruletki
+    \item metoda selekcji rankingowej
+\end{itemize}
+Algorytm zwraca najlepszego osobnika wraz z jego wartością funkcji dopasowania. Program wyświetla obraz reprezentowany przez tego osobnika.
+\subsection{Wykorzystane narzędzia i biblioteki}
+Do napisania aplikacji użyliśmy języka Python w wersji: 3.8, dokumentacja została stworzona przy użyciu języka Latex, a IDE z którego korzystaliśmy to Visual Studio Code. Użyliśmy również systemu kontroli wersji Git.
+
+Spis użytych bibliotek znajduje się w pliku {\it requirements.txt}.
+Do najważniejszych z nich należy biblioteka Pillow wykorzystana do obsługi obrazów.

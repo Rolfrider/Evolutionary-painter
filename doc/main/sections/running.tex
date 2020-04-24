@@ -1,0 +1,13 @@
+\section{Uruchamianie aplikacji i odtworzenie wyników testów}
+\subsection{Uruchomienie aplikacji}
+W celu uruchomienia aplikacji należy wykonać komendę:
+\begin{verbatim}
+python app.py "simple_img.jpg" 30 20 45 1000 0.95 "inter" "best"
+\end{verbatim}
+Wówczas aplikacja zostanie wykonana dla wielkości populacji równej 30, w każdym z osobników będzie 20 prostokątów, podpopulacja wybierana z populacji do krzyżowania będzie składać się z 45 osobników, maksymalna liczba iteracji wyniesie 1000, a warunkiem stopu będzie dopasowanie na poziomie 95\%.
+Algorytm użyje interpolacji przy krzyżowaniu, oraz użyje metody $\mu$ najlepszych do wybrania kolejnej generacji populacji. Pozostałe dostępne wartości to {\it mean} - uśrednianie - dla krzyżowania oraz {\it roulette} i {\it ranking} (odpowiednio metoda koła ruletki i selekcji rankingowej) dla wybierania.
+\subsection{Odtworzenie testów}
+W celu odtworzenia przeprowadzonych testów należy wykonać komendę:
+\begin{verbatim}
+python examination.py
+\end{verbatim}
