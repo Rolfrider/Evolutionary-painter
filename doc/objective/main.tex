@@ -3,7 +3,7 @@
 \usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
 
-\title{Ewolucyjny malarz \\ \large Cel projektu}
+\title{Ewolucyjny malarz }
 \author{Rafał Kwiatkowski, Franciszek Sioma}
 
 
@@ -11,9 +11,12 @@
 \pagenumbering{gobble}
 \maketitle
 
-Celem projektu {\it Ewolucyjny Malarz} jest stworzenie aplikacji wykorzystującej algorytm ewolucyjny, która na wejściu przyjmuje kolorowy obrazek, a na wyjściu zwraca możliwe jak najdokładniejsze odwzorowanie tego obrazu przy użyciu prostokątów RGBA. 
+\section{Opis projektu}
+\subsection{Cel projektu}
+Celem projektu {\it Ewolucyjny Malarz} było stworzenie aplikacji wykorzystującej algorytm ewolucyjny. Aplikacja przyjmuje na wejściu kolorowy obrazek, a na wyjściu zwraca możliwe jak najdokładniejsze odwzorowanie obrazu wejściowego przy użyciu prostokątów RGBA. 
 
-W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Osobnik}. W naszym przypadku osobnikiem będzie obraz stworzony z {\it n} prostokątów RGBA. Każdy prostokąt będzie się składał z 8 wartości: 
+\subsection{Przyjęte założenia}
+W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Osobnik}. W naszym przypadku osobnikiem jest obraz stworzony z {\it n} prostokątów RGBA. Każdy prostokąt składa się z 8 wartości: 
 \begin{description}
     \item[R] kanał czerwony
     \item[G] kanał zielony
@@ -26,12 +29,54 @@ W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Oso
 \end{description}
 
 Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania ({\it J}). W naszym przypadku funkcja ta będzie przyjmować wartości od 0 do 1 i będzie obliczana na podstawie porównywania piksel po pikselu obrazu stworzonego przez osobnika z obrazem oryginalnym.
+\subsection{Wkład autorów}
+\begin{itemize}
+    \item Obsługa obrazów - Rafał Kwiatkowski
+    \item Algorytm Ewolucyjny - Franciszek Sioma
+    \item Testy i eksperymenty - Rafał Kwiatkowski
+    \item Dokumentacja - Franciszek Sioma
+\end{itemize}
+\subsection{Decyzje projektowe}
+Algorytm zakłada dwa rodzaje krzyżowania osobników:
+\begin{itemize}
+    \item uśrednianie
+    \item interpolacja
+\end{itemize}
+W naszym programie postanowiliśmy umieścić oba te sposoby, by móc przebadać ich wpływ na końcowy wynik algorytmu.
+Taki sam zabieg dotyczy metod wybierania kolejnej generacji populacji. Zaimplementowane metody to:
+\begin{itemize}
+    \item metoda $\mu$ najlepszych
+    \item metoda koła ruletki
+    \item metoda selekcji rankingowej
+\end{itemize}
+Algorytm zwraca najlepszego osobnika wraz z jego wartością funkcji dopasowania. Program wyświetla obraz reprezentowany przez tego osobnika.
+\subsection{Wykorzystane narzędzia i biblioteki}
+Do napisania aplikacji użyliśmy języka Python w wersji: 3.8, dokumentacja została stworzona przy użyciu języka Latex, a IDE z którego korzystaliśmy to Visual Studio Code. Użyliśmy również systemu kontroli wersji Git.
 
-Planujemy wykonać szereg testów, które pomogą nam odpowiedzieć na pytanie jak działa aplikacja w zależności od następujących parametrów:
+Spis użytych bibliotek znajduje się w pliku {\it requirements.txt}.
+Do najważniejszych z nich należy biblioteka Pillow wykorzystana do obsługi obrazów.
+\section{Uruchamianie aplikacji i odtworzenie wyników testów}
+W celu uruchomienia aplikacji należy wykonać komendę:
+\begin{verbatim}
+python app.py "simple_img.jpg" 30 20 45 1000 0.95 "inter" "best"
+\end{verbatim}
+Wówczas aplikacja zostanie wykonana dla wielkości polpulacji równej 30, w każdym z osobników będzie 20 prostokątów, podpopulacja wybierana z populacji do krzyżowania będzie składać się z 45 osobników, maksymalna liczba iteracji wyniesie 1000, a warunkiem stopu będzie dopasowanie na poziomie 95\%.
+Algorytm użyje interpolacji przy krzyżowaniu, oraz użyje metody najlepszego dopasowania do wybrania kolejnej generacji populacji. Pozostałe dostępne wartości to "mean" - uśrednianie dla krzyżowania oraz "roulette" i "ranking" (odpowiednio metoda koła ruletki i selekcji rankingowej) dla wybierania.
+\section{Testy}
+Wykonaliśmy szereg testów, sprawdzających jak działa aplikacja w zależności od następujących parametrów:
 \begin{itemize}
     \item liczebność populacji
-    \item liczba prostokątów w danym osobniku
+    \item liczba prostokątów w osobniku
     \item strategia krzyżowania
-    \item strategia mutowania
+    \item strategia wybierania kolejnej generacji populacji
 \end{itemize}
+\subsection{Testy i wyniki}
+Wszystkie testy zostały wykonane dla obrazu {\it simple\_img.jpg} oraz dla maksymalnej liczby iteracji równej 1000. Każdy test został przeprowadzony pięciokrotnie. 
+\subsection*{Wpływ liczebności populacji}
+Test wpływu liczebności populacji został przeprowadzony dla populacji o wielkościach: 2, 10, 15, 30, 40, 50, 100, liczbie prostokątów w osobniku równej 20, wielkości podpopulacji będącej 1,5 raza większej od wielkości testowanej populacji, oraz dopasowania będącego warunkiem stopu na poziomie 99\%. Zastosowano krzyżowanie przez uśrednianie i wyboru następnej generacji populacji przez wybór najlepszych osobników.  
+\subsection*{Wpływ liczby prostokątów w osobniku}
+Następny test został przeprowadzony dla następującyh liczb prostokątów w osobniku: 10, 20, 50, 100, 200, 300. Wielkość populacji wynosiła 10, podpopulacji 15. Pozostałe parametry zostały niezmienione względem poprzedniego testu. 
+\subsection*{Wpływ użytej strategii krzyżowania}
+\subsection*{Wpływ użytej strategii wybierania kolejnej populacji}
+\subsection{Wnioski}
 \end{document}

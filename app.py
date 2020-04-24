@@ -3,7 +3,7 @@ from evolutionary_algorithm.algorithm import Algorithm
 from evolutionary_algorithm.crossing import *
 from evolutionary_algorithm.picking import *
 from PIL import Image
-
+import matplotlib.pyplot as plt
 
 def parse_crossing(arg) -> CrossingStrategy:
     if arg == "inter":
@@ -33,8 +33,15 @@ def run(image, population, rects, subpopulation, maxIter, target, crossing, pick
         maxIter,
         target
     )
-
+    result.save_here("result")
+    img.save("result_img.png")
     img.show()
+
+    fig = plt.figure()
+    plt.plot(result.iters, result.scores)
+    plt.xlabel("Iterations")
+    plt.ylabel("Score")
+    fig.savefig("result.pdf")
 
 
 if __name__ == "__main__":
