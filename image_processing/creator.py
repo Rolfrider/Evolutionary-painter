@@ -6,7 +6,7 @@ from evolutionary_algorithm.individual import Individual
 
 def create_image(individual: Individual, width: int, height: int) -> Image:
     final_image = Image.new('RGBA', (width, height))
-    for rect in map(lambda x: x.rect, individual.data):
+    for rect in map(lambda x: x.rect, sorted(individual.data, key=lambda x: x.rect.a, reverse=True)):
         image = Image.new('RGBA', (width, height))
         draw = ImageDraw.Draw(image)
         draw.rectangle(calc_vertexes(rect),

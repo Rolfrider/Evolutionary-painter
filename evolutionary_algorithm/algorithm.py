@@ -34,7 +34,8 @@ class Algorithm:
 
             subpopulation = self.population.create_subpopulation(
                 subpopulation_size)
-
+            if self.crossing_strategy is InterpolateCrossing:
+                self.crossing_strategy.factor = random.normal()
             offspring = subpopulation.create_offspring_by_crossing(
                 self.crossing_strategy)
 
