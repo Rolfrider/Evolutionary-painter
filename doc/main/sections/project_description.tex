@@ -19,8 +19,8 @@ Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania 
 \subsection{Wkład autorów}
 \begin{itemize}
     \item Obsługa obrazów - Rafał Kwiatkowski
-    \item Algorytm Ewolucyjny - Franciszek Sioma
-    \item Testy i eksperymenty - Rafał Kwiatkowski
+    \item Algorytm Ewolucyjny - Rafał Kwiatkowski i Franciszek Sioma
+    \item Testy i eksperymenty - Rafał Kwiatkowski i Franciszek Sioma
     \item Dokumentacja - Franciszek Sioma
 \end{itemize}
 \subsection{Decyzje projektowe}
@@ -37,6 +37,7 @@ Taki sam zabieg dotyczy metod wybierania kolejnej generacji populacji. Zaimpleme
     \item metoda selekcji rankingowej
 \end{itemize}
 Algorytm zwraca najlepszego osobnika wraz z jego wartością funkcji dopasowania. Program wyświetla obraz reprezentowany przez tego osobnika.
+W celu przyśpieszenia algorytmu każdy z osobników przechowuje swoją wartość funkcji dopasowania. Dzięki temu jest ona liczona tylko raz dla każdego osobnika.
 \subsection{Wykorzystane narzędzia i biblioteki}
 Do napisania aplikacji użyliśmy języka Python w wersji: 3.8, dokumentacja została stworzona przy użyciu języka Latex, a IDE z którego korzystaliśmy to Visual Studio Code. Użyliśmy również systemu kontroli wersji Git.
 
