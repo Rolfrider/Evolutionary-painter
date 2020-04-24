@@ -2,7 +2,7 @@
 Wykonaliśmy szereg testów, sprawdzających jak działa aplikacja w zależności od następujących parametrów:
 \begin{itemize}
     \item liczebność populacji
-    \item liczebność populacji $\mu$
+    \item liczebność populacji $\lambda$
     \item liczba prostokątów w osobniku
     \item strategia krzyżowania
     \item strategia wybierania kolejnej generacji populacji
@@ -15,7 +15,7 @@ W celu uzyskania możliwie jak najbardziej prawdziwych wyników dla każdego prz
     \caption{Obrazek użyty w eksperymentach}
     \label{fig:test_image}
 \end{figure}
-Gdy nie było to przedmiotem eksperymentu to metodą krzyżowania było uśrednianie, a metodą wybierania - wybór najlepszych. Wykresy są tworzonę na podstawie punktów w których zmieniała się wartość funkcji dopasowania dla najlepszego osobnika, dlatego niektóre przebiegi kończą się wcześniej. Oznacza to, że wynik się nie zmienił już do końca eksperymentu.
+Gdy nie było to przedmiotem eksperymentu to metodą krzyżowania było uśrednianie, a metodą wybierania - wybór $\mu$ najlepszych. Wykresy są tworzonę na podstawie punktów w których zmieniała się wartość funkcji dopasowania dla najlepszego osobnika, dlatego niektóre przebiegi kończą się wcześniej. Oznacza to, że wynik się nie zmienił już do końca eksperymentu.
 
 \subsection*{Wpływ liczebności populacji}
 Test wpływu liczebności populacji został przeprowadzony dla populacji o wielkościach: 2, 10, 15, 30, 40, 50, 100, liczbie prostokątów w osobniku równej 20, wielkości populacji $\mu$ będącej 1,5 raza większej od wielkości testowanej populacji.
@@ -239,5 +239,4 @@ Dla populacji $\lambda$ - 20, populacji $\mu$ - 30 i liczbie 20 prostokątów w 
     \caption{Wyniki testów wybierania}
     \label{tab:picking}
 \end{table}
-Ciężko stwierdzić, która metoda wybierania jest najlepsza, ale skłaniamy się do preferęcji wyboru najlepszych lub przez ranking. Metoda ruletki wydaje się produkować najsłabsze rezultaty. Metoda wyboru najlepszych w późniejszych fazach traci mocno na efektywności. Metoda rankingu również w późniejszej fazie nieco zwalnia ale nie tak bardzo i wydaje się być dobrym rozwiązaniem dla naszego problemu.
-\subsection{Wnioski}
+Ciężko stwierdzić, która metoda wybierania jest najlepsza, ale skłaniamy się do preferencji wyboru najlepszych lub przez ranking. Metoda ruletki wydaje się produkować najsłabsze rezultaty. Metoda wyboru najlepszych w późniejszych fazach traci mocno na efektywności. Metoda rankingu również w późniejszej fazie nieco zwalnia ale nie tak bardzo i wydaje się być dobrym rozwiązaniem dla naszego problemu.

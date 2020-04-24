@@ -15,11 +15,11 @@ W algorytmie ewolucyjnym istotne jest to, aby zdefiniować czym będzie {\it Oso
     \item[H] wysokość       
 \end{description}
 
-Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania ({\it J}). W naszym przypadku funkcja ta będzie przyjmować wartości od 0 do 1 i będzie obliczana na podstawie porównywania piksel po pikselu obrazu stworzonego przez osobnika z obrazem oryginalnym.
+Kolejnym niejasnym punktem może być sposób obliczania funkcji przystosowania ({\it J}). W naszym przypadku funkcja ta przyjmuje wartości od 0 do 1 i będzie obliczana na podstawie porównywania piksel po pikselu obrazu stworzonego przez osobnika z obrazem oryginalnym.
 \subsection{Wkład autorów}
 \begin{itemize}
     \item Obsługa obrazów - Rafał Kwiatkowski
-    \item Algorytm Ewolucyjny - Rafał Kwiatkowski i Franciszek Sioma
+    \item Algorytm Ewolucyjny - Franciszek Sioma i Rafał Kwiatkowski
     \item Testy i eksperymenty - Rafał Kwiatkowski i Franciszek Sioma
     \item Dokumentacja - Franciszek Sioma
 \end{itemize}
@@ -37,6 +37,7 @@ Taki sam zabieg dotyczy metod wybierania kolejnej generacji populacji. Zaimpleme
     \item metoda selekcji rankingowej
 \end{itemize}
 Algorytm zwraca najlepszego osobnika wraz z jego wartością funkcji dopasowania. Program wyświetla obraz reprezentowany przez tego osobnika.
+
 W celu przyśpieszenia algorytmu każdy z osobników przechowuje swoją wartość funkcji dopasowania. Dzięki temu jest ona liczona tylko raz dla każdego osobnika.
 \subsection{Wykorzystane narzędzia i biblioteki}
 Do napisania aplikacji użyliśmy języka Python w wersji: 3.8, dokumentacja została stworzona przy użyciu języka Latex, a IDE z którego korzystaliśmy to Visual Studio Code. Użyliśmy również systemu kontroli wersji Git.
