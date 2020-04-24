@@ -18,6 +18,10 @@ class Result:
         with open(file_name, "w") as file:
             json.dump(self.__dict__, file)
 
+    def save_here(self, name):
+        with open(name + ".json", "w") as file:
+            json.dump(self.__dict__, file)
+
     def add_point(self, score, iter):
         if len(self.scores) > 0 and len(self.iters) > 0:
             last_scores = self.scores[-1]
